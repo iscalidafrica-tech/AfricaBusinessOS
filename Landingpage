@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>The African Business OS — AI Systems That Actually Work Here</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --orange: #FF6B35;
+  --gold: #FFBE0B;
+  --forest: #1B4332;
+  --green: #2D6A4F;
+  --mint: #D8F3DC;
+  --warm: #F8F4EF;
+  --sand: #F0E6D3;
+  --charcoal: #2C2C2A;
+  --gray: #5A5A58;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { font-family: 'Instrument Sans', sans-serif; background: var(--warm); color: var(--charcoal); line-height: 1.7; -webkit-font-smoothing: antialiased; font-size: 16px; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+.narrow { max-width: 720px; margin: 0 auto; }
+.hero { background: var(--forest); padding: 2.5rem 0 3rem; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: var(--orange); opacity: 0.08; border-radius: 50%; }
+.hero::after { content: ''; position: absolute; bottom: -40px; left: 10%; width: 150px; height: 150px; background: var(--gold); opacity: 0.06; border-radius: 50%; }
+.hero-content { position: relative; z-index: 1; }
+.hero-tag { display: inline-block; background: var(--orange); color: white; font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 16px; border-radius: 20px; margin-bottom: 1.25rem; }
+.hero h1 { font-family: 'Syne', sans-serif; font-size: 32px; font-weight: 800; color: white; line-height: 1.2; margin-bottom: 1rem; }
+.hero h1 span { color: var(--gold); display: inline; }
+.hero-sub { font-size: 17px; color: rgba(255,255,255,0.9); line-height: 1.6; margin-bottom: 1.5rem; }
+.hero-price { background: rgba(255,255,255,0.12); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.25); border-radius: 14px; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; }
+.price-label { font-size: 12px; color: rgba(255,255,255,0.75); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.6rem; font-weight: 600; }
+.price-main { font-family: 'Syne', sans-serif; font-size: 36px; font-weight: 800; color: var(--gold); line-height: 1.1; margin-bottom: 0.75rem; }
+.price-others { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.6; }
+.price-others strong { color: rgba(255,255,255,0.95); font-weight: 600; }
+.cta-primary { display: inline-block; background: var(--orange); color: white; font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; padding: 16px 32px; border-radius: 12px; text-decoration: none; transition: all 0.2s; border: none; cursor: pointer; box-shadow: 0 4px 20px rgba(255,107,53,0.35); text-align: center; width: 100%; max-width: 400px; }
+.cta-primary:active { transform: scale(0.98); }
+.trust-line { margin-top: 1.25rem; font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.6; }
+.problem-section, .story-section, .before-after, .what-you-get, .sample-prompt, .setup-preview, .final-cta, .faq-section { padding: 3rem 0; }
+.problem-section { background: white; }
+.section-header { text-align: center; margin-bottom: 2.5rem; }
+.section-tag { display: inline-block; background: var(--sand); color: var(--forest); font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 16px; border-radius: 20px; margin-bottom: 1rem; }
+.section-title { font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; color: var(--charcoal); line-height: 1.25; margin-bottom: 1rem; padding: 0 10px; }
+.section-title span { color: var(--orange); }
+.section-sub { font-size: 16px; color: var(--gray); max-width: 600px; margin: 0 auto; line-height: 1.7; padding: 0 10px; }
+.problem-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; margin-top: 2rem; }
+.problem-card { background: var(--warm); border: 2px solid #e8e8e8; border-radius: 14px; padding: 1.75rem 1.5rem; transition: all 0.2s; }
+.problem-card:active { transform: scale(0.98); }
+.problem-icon { font-size: 40px; margin-bottom: 1rem; display: block; }
+.problem-title { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; color: var(--charcoal); margin-bottom: 0.75rem; line-height: 1.35; }
+.problem-text { font-size: 15px; color: var(--gray); line-height: 1.65; }
+.story-section { padding: 3rem 0; background: var(--forest); color: white; }
+.story-content { max-width: 720px; margin: 0 auto; }
+.story-section .section-tag { background: rgba(255,255,255,0.15); color: var(--gold); }
+.story-section .section-title { color: white; }
+.story-section .section-title span { color: var(--gold); }
+.story-section .section-sub { color: rgba(255,255,255,0.85); }
+.story-text { font-size: 16px; line-height: 1.75; color: rgba(255,255,255,0.9); margin-top: 2rem; }
+.story-text p { margin-bottom: 1.25rem; }
+.story-text strong { color: var(--gold); font-weight: 700; }
+.story-highlight { background: rgba(255,190,11,0.15); border-left: 4px solid var(--gold); padding: 1.25rem 1.5rem; border-radius: 10px; margin: 2rem 0; font-size: 16px; line-height: 1.7; color: white; }
+.before-after { padding: 3rem 0; background: white; }
+.comparison { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 2.5rem; }
+.comparison-side { border-radius: 14px; overflow: hidden; box-shadow: 0 4px 25px rgba(0,0,0,0.1); }
+.comparison-header { padding: 1rem 1.25rem; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 15px; text-align: center; }
+.before .comparison-header { background: #dc2626; color: white; }
+.after .comparison-header { background: var(--green); color: white; }
+.comparison-body { padding: 1.25rem; background: white; min-height: 250px; }
+.chaos-messages { display: flex; flex-direction: column; gap: 0.75rem; }
+.message-bubble { background: #f3f4f6; padding: 0.75rem 1rem; border-radius: 10px; font-size: 13px; line-height: 1.55; color: #374151; position: relative; padding-left: 1.25rem; }
+.message-bubble::before { content: ''; width: 6px; height: 6px; background: #ef4444; border-radius: 50%; position: absolute; left: 8px; top: 14px; }
+.tracker-view { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; overflow-x: auto; font-size: 11px; -webkit-overflow-scrolling: touch; }
+.tracker-row { display: grid; grid-template-columns: 2fr 1fr 1fr 1.2fr; gap: 6px; padding: 10px 8px; border-bottom: 1px solid #e5e7eb; min-width: 400px; }
+.tracker-row.header { background: var(--forest); color: white; font-weight: 700; position: sticky; top: 0; }
+.tracker-row:last-child { border-bottom: none; }
+.tracker-cell { padding: 2px 4px; word-break: break-word; }
+.status-badge { display: inline-block; padding: 3px 8px; border-radius: 10px; font-size: 10px; font-weight: 600; white-space: nowrap; }
+.status-active { background: #dbeafe; color: #1e40af; }
+.status-overdue { background: #fee2e2; color: #991b1b; }
+.status-delivered { background: var(--mint); color: var(--forest); }
+.what-you-get { padding: 3rem 0; background: var(--warm); }
+.components-grid { display: grid; gap: 1.5rem; margin-top: 2.5rem; }
+.component-card { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 25px rgba(0,0,0,0.08); }
+.component-header { background: var(--forest); padding: 1.5rem 1.25rem; position: relative; overflow: hidden; }
+.component-header::before { content: ''; position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: var(--orange); opacity: 0.1; border-radius: 50%; }
+.component-number { display: inline-flex; align-items: center; justify-content: center; background: var(--orange); color: white; font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 800; width: 30px; height: 30px; border-radius: 50%; margin-bottom: 1rem; position: relative; z-index: 1; }
+.component-icon { font-size: 44px; margin-bottom: 1rem; position: relative; z-index: 1; }
+.component-name { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: white; margin-bottom: 0.6rem; position: relative; z-index: 1; line-height: 1.25; }
+.component-tagline { font-size: 14px; color: rgba(255,255,255,0.85); position: relative; z-index: 1; line-height: 1.5; }
+.component-body { padding: 1.5rem 1.25rem; }
+.component-desc { font-size: 15px; line-height: 1.7; color: var(--gray); margin-bottom: 1.25rem; }
+.feature-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+.feature-list li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 14px; line-height: 1.65; color: var(--charcoal); }
+.feature-list li::before { content: '✓'; flex-shrink: 0; width: 22px; height: 22px; background: var(--mint); color: var(--forest); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; margin-top: 2px; }
+.feature-highlight { background: var(--mint); border-left: 4px solid var(--green); padding: 1rem 1.25rem; border-radius: 10px; margin-top: 1.25rem; }
+.feature-highlight-title { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--forest); margin-bottom: 0.5rem; }
+.feature-highlight-text { font-size: 13px; line-height: 1.65; color: var(--forest); }
+.sample-prompt { padding: 3rem 0; background: white; }
+.prompt-demo { background: var(--forest); border-radius: 16px; overflow: hidden; margin-top: 2rem; box-shadow: 0 6px 30px rgba(0,0,0,0.12); }
+.prompt-demo-header { background: rgba(0,0,0,0.2); padding: 1rem 1.25rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.prompt-demo-title { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; color: var(--gold); margin-bottom: 0.25rem; }
+.prompt-demo-sub { font-size: 12px; color: rgba(255,255,255,0.65); }
+.prompt-demo-body { padding: 1.5rem 1.25rem; }
+.prompt-section { margin-bottom: 1.5rem; }
+.prompt-section:last-child { margin-bottom: 0; }
+.prompt-label { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.6rem; }
+.prompt-content { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; padding: 1rem 1.25rem; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.7; color: rgba(255,255,255,0.9); word-break: break-word; overflow-wrap: break-word; }
+.prompt-output { background: rgba(255,190,11,0.12); border: 1px solid rgba(255,190,11,0.3); }
+.prompt-result { background: var(--mint); border-radius: 10px; padding: 1rem 1.25rem; margin-top: 1.25rem; }
+.prompt-result-label { font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700; color: var(--forest); margin-bottom: 0.5rem; }
+.prompt-result-text { font-size: 13px; line-height: 1.7; color: var(--forest); }
+.cta-mid-section { padding: 3rem 0; background: var(--sand); text-align: center; }
+.cta-mid-box { background: linear-gradient(135deg, var(--forest) 0%, var(--green) 100%); border-radius: 16px; padding: 2.5rem 1.5rem; max-width: 650px; margin: 0 auto; box-shadow: 0 6px 30px rgba(0,0,0,0.15); }
+.cta-mid-title { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; color: white; margin-bottom: 1rem; line-height: 1.3; }
+.cta-mid-text { font-size: 15px; color: rgba(255,255,255,0.9); margin-bottom: 1.5rem; line-height: 1.7; }
+.cta-mid-button { display: inline-block; background: var(--orange); color: white; font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; padding: 16px 40px; border-radius: 12px; text-decoration: none; transition: all 0.2s; box-shadow: 0 4px 20px rgba(255,107,53,0.4); }
+.cta-mid-button:active { transform: scale(0.98); }
+.setup-preview { padding: 3rem 0; background: var(--warm); }
+.setup-timeline { margin-top: 2rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+.setup-day { background: white; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.25rem; border-left: 5px solid var(--orange); box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+.setup-day-header { display: flex; align-items: center; gap: 1rem; }
+.setup-day-icon { font-size: 32px; flex-shrink: 0; }
+.setup-day-info h3 { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; color: var(--charcoal); margin-bottom: 0.25rem; line-height: 1.3; }
+.setup-day-time { font-size: 14px; color: var(--gray); font-weight: 500; line-height: 1.5; }
+.final-cta { padding: 3rem 0; background: white; text-align: center; }
+.cta-box { background: linear-gradient(135deg, var(--orange) 0%, #ff8c61 100%); border-radius: 18px; padding: 2.5rem 1.5rem; max-width: 700px; margin: 0 auto; box-shadow: 0 8px 40px rgba(255,107,53,0.3); }
+.cta-box-title { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; color: white; margin-bottom: 1rem; line-height: 1.3; }
+.cta-box-text { font-size: 16px; color: rgba(255,255,255,0.95); margin-bottom: 1.75rem; line-height: 1.7; }
+.cta-box-text strong { font-weight: 700; }
+.cta-price-final { font-family: 'Syne', sans-serif; font-size: 42px; font-weight: 800; color: white; margin-bottom: 0.5rem; line-height: 1; }
+.cta-price-note { font-size: 13px; color: rgba(255,255,255,0.85); margin-bottom: 1.75rem; line-height: 1.6; }
+.cta-secondary { display: inline-block; background: white; color: var(--orange); font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; padding: 16px 40px; border-radius: 12px; text-decoration: none; transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.15); width: 100%; max-width: 350px; }
+.cta-secondary:active { transform: scale(0.98); }
+.faq-section { padding: 3rem 0; background: var(--warm); }
+.faq-list { max-width: 700px; margin: 2rem auto 0; }
+.faq-item { background: white; border-radius: 12px; margin-bottom: 1rem; overflow: hidden; border: 1px solid #e8e8e8; }
+.faq-question { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: var(--charcoal); padding: 1.25rem 1.25rem; cursor: pointer; display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; transition: all 0.2s; line-height: 1.4; min-height: 60px; }
+.faq-question:active { background: var(--warm); }
+.faq-icon { font-size: 18px; color: var(--orange); transition: transform 0.3s; flex-shrink: 0; margin-top: 2px; }
+.faq-item.active .faq-icon { transform: rotate(180deg); }
+.faq-answer { padding: 0 1.25rem; max-height: 0; overflow: hidden; transition: all 0.3s; }
+.faq-item.active .faq-answer { max-height: 1000px; padding: 0 1.25rem 1.25rem; }
+.faq-answer p { font-size: 14px; line-height: 1.7; color: var(--gray); }
+.footer { background: var(--forest); padding: 2.5rem 0 1.5rem; color: rgba(255,255,255,0.7); }
+.footer-content { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 2rem; }
+.footer-brand h3 { font-family: 'Syne', sans-serif; font-size: 19px; font-weight: 800; color: var(--gold); margin-bottom: 0.75rem; }
+.footer-brand p { font-size: 14px; line-height: 1.65; color: rgba(255,255,255,0.65); }
+.footer-links h4 { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: white; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.footer-links ul { list-style: none; }
+.footer-links li { margin-bottom: 0.6rem; }
+.footer-links a { font-size: 14px; color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s; }
+.footer-links a:active { color: var(--gold); }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.25rem; text-align: center; font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.6; }
+@media (min-width: 600px) { .hero h1 { font-size: 42px; } .section-title { font-size: 34px; } .problem-grid { grid-template-columns: repeat(2, 1fr); } .comparison { grid-template-columns: 1fr 1fr; } .footer-content { grid-template-columns: repeat(2, 1fr); } .cta-primary, .cta-secondary { width: auto; } }
+@media (min-width: 900px) { .hero { padding: 3.5rem 0 4.5rem; } .hero h1 { font-size: 52px; } .section-title { font-size: 38px; } .footer-content { grid-template-columns: repeat(3, 1fr); } }
+</style>
+</head>
+<body>
+
+<!-- CTA #1: HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content narrow">
+      <div class="hero-tag">AI for African Teams</div>
+      <h1>AI that actually works <span>for your African business</span></h1>
+      <p class="hero-sub">Stop fighting with ChatGPT that gives you robotic American outputs. Get AI prompts, automations, and systems built for Nigerian businesses, Kenyan freelancers, Ghanaian agencies — teams that work on WhatsApp, mobile, and Naira. Done in a week.</p>
+      
+      <div class="hero-price">
+        <div class="price-label">Pre-Order Launch Price</div>
+        <div class="price-main">₦7,500</div>
+        <div class="price-others">Regular: <strong>₦10,500</strong> after May 4</div>
+      </div>
+      
+      <a href="https://nestuge.me/elizabethaghogho" class="cta-primary">Pre-Order for ₦7,500 →</a>
+      
+      <p class="trust-line">✓ Pre-order • Full kit ships May 5 • 10 prompts delivered instantly</p>
+    </div>
+  </div>
+</section>
+
+<section class="problem-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">Sound Familiar?</div>
+      <h2 class="section-title">Sound Familiar?</h2>
+      <p class="section-sub">Not because AI doesn't work — because most AI tools weren't built for how African businesses actually run.</p>
+    </div>
+    
+    <div class="problem-grid">
+      <div class="problem-card">
+        <span class="problem-icon">🤖</span>
+        <h3 class="problem-title">ChatGPT gave you generic nonsense</h3>
+        <p class="problem-text">You tried using AI to write a client proposal. It came back sounding like it was written for a Silicon Valley startup, not your Lagos agency.</p>
+      </div>
+      <div class="problem-card">
+        <span class="problem-icon">🔌</span>
+        <h3 class="problem-title">You tried to automate, but nothing connected</h3>
+        <p class="problem-text">Zapier, Make, n8n — the tutorials made it look easy. But your payment processor isn't in the list. Your invoicing tool doesn't integrate. You gave up.</p>
+      </div>
+      <div class="problem-card">
+        <span class="problem-icon">💸</span>
+        <h3 class="problem-title">You lost a client to a follow-up that never happened</h3>
+        <p class="problem-text">The reminder lived in your head. You got busy. The follow-up never went out. The client moved on. That was ₦2M you'll never get back.</p>
+      </div>
+      <div class="problem-card">
+        <span class="problem-icon">🔁</span>
+        <h3 class="problem-title">Every new client feels like starting from scratch</h3>
+        <p class="problem-text">You're building the same proposal, sending the same onboarding questions, explaining the same process. There's no template. There's no system.</p>
+      </div>
+      <div class="problem-card">
+        <span class="problem-icon">👤</span>
+        <h3 class="problem-title">Your business only runs because you're in it</h3>
+        <p class="problem-text">You haven't taken a weekend off in 8 months. Every holiday, you're on WhatsApp. Every evening, you're putting out fires. If you stop, it stops.</p>
+      </div>
+      <div class="problem-card">
+        <span class="problem-icon">💳</span>
+        <h3 class="problem-title">You subscribed to an AI tool, used it twice, it's still charging you</h3>
+        <p class="problem-text">$15/month seemed cheap. But the tool was built for developers. The interface made no sense. You stopped using it in week two. It's still billing you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="story-section">
+  <div class="container">
+    <div class="story-content">
+      <div class="section-header">
+        <div class="section-tag">Why I Built This</div>
+        <h2 class="section-title">I built AI systems for <span>paying clients across 3 countries.</span> Then I came home.</h2>
+        <p class="section-sub">And I realized: none of it works here the way it's taught online.</p>
+      </div>
+      <!-- YOUR PHOTO IS HERE -->
+      <div style="text-align: center; margin: 2rem 0;">
+        <img src="https://i.ibb.co/Wvfy5M38/slazzer-preview-7ix3l.png" alt="Elizabeth - AI Systems Architect" style="max-width: 280px; width: 100%; border-radius: 16px; box-shadow: 0 8px 30px rgba(0,0,0,0.2); border: 4px solid var(--gold);">
+      </div>
+      <div class="story-text">
+        <p>My name is <strong>Elizabeth</strong>. I'm an AI Systems Architect based in Lagos.</p>
+        <p>I never learned to code. Everything I build, I built through <strong>prompt engineering, AI tools, and systems thinking.</strong> I've automated client intake for fintech teams. Built content generation workflows for marketing agencies. Created reconciliation systems for cooperatives. Real systems. Real results. Real payments.</p>
+        <p>Then I started working with <strong>African SMEs</strong> — agencies in Lagos, freelancers in Nairobi, small businesses in Accra, consultants in Joburg.</p>
+        <div class="story-highlight">And I kept seeing the same pattern: they'd try AI, get frustrated, and go back to doing everything manually. Not because they weren't smart. Because the tools and tutorials assumed you work like a tech company in San Francisco.</div>
+        <p>They assumed you have <strong>Slack, Notion, Stripe, and unlimited WiFi.</strong></p>
+        <p>But you don't. You have <strong>WhatsApp, Google Sheets, Paystack, and MTN data that cuts out mid-call.</strong></p>
+        <p>So I built this kit.</p>
+        <p><strong>The African Business OS</strong> — AI systems designed for <strong>mobile-first, WhatsApp-native, Naira-dealing, data-conscious teams.</strong> Real tools. Real templates. Real prompts that understand you're not writing to someone in New York — you're writing to a client in Lekki who talks on voice notes and pays via bank transfer.</p>
+        <p>This is what I wish existed when I started.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="before-after">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">The Difference</div>
+      <h2 class="section-title">From chaos to <span>clarity in one week</span></h2>
+      <p class="section-sub">This is what you're buying. Not a theory. A working system.</p>
+    </div>
+    <div class="comparison">
+      <div class="comparison-side before">
+        <div class="comparison-header">❌ Before: WhatsApp Chaos</div>
+        <div class="comparison-body">
+          <div class="chaos-messages">
+            <div class="message-bubble">"Has anyone followed up with the Lekki client?"</div>
+            <div class="message-bubble">"Which invoice is overdue again?"</div>
+            <div class="message-bubble">"Where are we on the Ikoyi project?"</div>
+            <div class="message-bubble">"I thought you were handling that??"</div>
+            <div class="message-bubble">"Check the other group… or was it DM?"</div>
+            <div class="message-bubble">"47 unread messages"</div>
+          </div>
+          <p style="text-align: center; padding: 1.5rem 0; color: var(--gray); font-size: 13px; font-style: italic;">Nobody knows what's happening.<br>Everything lives in your head.</p>
+        </div>
+      </div>
+      <div class="comparison-side after">
+        <div class="comparison-header">✓ After: Business Command Centre</div>
+        <div class="comparison-body">
+          <div class="tracker-view">
+            <div class="tracker-row header"><div class="tracker-cell">Client</div><div class="tracker-cell">Stage</div><div class="tracker-cell">Due Date</div><div class="tracker-cell">Action</div></div>
+            <div class="tracker-row"><div class="tracker-cell">Lekki Brand Co</div><div class="tracker-cell"><span class="status-badge status-active">Active</span></div><div class="tracker-cell">Apr 18</div><div class="tracker-cell">Deliver draft</div></div>
+            <div class="tracker-row"><div class="tracker-cell">Ikoyi Consulting</div><div class="tracker-cell"><span class="status-badge status-delivered">Delivered</span></div><div class="tracker-cell">Apr 15</div><div class="tracker-cell">Get feedback</div></div>
+            <div class="tracker-row"><div class="tracker-cell">VI Tech Startup</div><div class="tracker-cell"><span class="status-badge status-overdue">Overdue</span></div><div class="tracker-cell">Apr 10</div><div class="tracker-cell">FOLLOW UP NOW</div></div>
+            <div class="tracker-row"><div class="tracker-cell">Surulere SME</div><div class="tracker-cell"><span class="status-badge status-active">Active</span></div><div class="tracker-cell">Apr 22</div><div class="tracker-cell">Brief call</div></div>
+          </div>
+          <p style="text-align: center; padding: 1.5rem 0; color: var(--green); font-size: 13px; font-weight: 600;">✓ Everything visible in 5 seconds<br>✓ Updates from mobile<br>✓ Automatic overdue alerts</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="what-you-get">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">What's Inside</div>
+      <h2 class="section-title">4 AI-powered components. <span>Done in a week.</span></h2>
+      <p class="section-sub">Everything you need to stop running your business on memory and WhatsApp threads.</p>
+    </div>
+    <div class="components-grid">
+      <div class="component-card">
+        <div class="component-header"><div class="component-number">1</div><div class="component-icon">🤖</div><h3 class="component-name">AI Prompt Starter Library</h3><p class="component-tagline">40 copy-paste prompts that actually work here</p></div>
+        <div class="component-body">
+          <p class="component-desc">Generic ChatGPT prompts give you generic American outputs. These AI prompts are built for African business contexts — local currencies, WhatsApp tone, Paystack references, real Nigerian/Kenyan/Ghanaian scenarios.</p>
+          <ul class="feature-list"><li><strong>Client Communication:</strong> AI-generated proposals, follow-ups, onboarding emails, difficult conversations</li><li><strong>Operations:</strong> SOPs, briefs, team check-ins, project handovers written by AI</li><li><strong>Marketing:</strong> Social posts, bios, service descriptions, testimonial requests</li><li><strong>Sales:</strong> Cold outreach, pricing explanations, objection handling</li><li><strong>Each prompt includes:</strong> The full prompt text + how to use it + AI sample output + why it works</li><li><strong>Context-first format:</strong> Always includes your business type, city, currency, communication style</li></ul>
+          <div class="feature-highlight"><div class="feature-highlight-title">💡 AI Example Included Below</div><div class="feature-highlight-text">See a full AI prompt breakdown — from input to output — so you know exactly what you're getting.</div></div>
+        </div>
+      </div>
+      <div class="component-card">
+        <div class="component-header"><div class="component-number">2</div><div class="component-icon">📊</div><h3 class="component-name">Business Command Centre</h3><p class="component-tagline">Your entire business in one Google Sheet</p></div>
+        <div class="component-body">
+          <p class="component-desc">Stop juggling WhatsApp threads, notes apps, and your memory. The Command Centre is a pre-built Google Sheets template that tracks clients, projects, tasks, and follow-ups — all in one place, accessible from your phone.</p>
+          <ul class="feature-list"><li><strong>Client Tracker:</strong> Name, stage, next action, owner, due date — see everything at a glance</li><li><strong>Project Pipeline:</strong> What's active, what's delivered, what's awaiting payment</li><li><strong>Task Board:</strong> Who owns what, when it's due, what's overdue</li><li><strong>Weekly Review Template:</strong> 10-minute Monday check-in replaces hour-long meetings</li><li><strong>Pre-built formulas:</strong> Automatic alerts when follow-ups are overdue</li><li><strong>Mobile-first:</strong> Your team updates from their phones via Google Sheets app</li><li><strong>WhatsApp-ready:</strong> Share the link, everyone's in sync</li></ul>
+          <div class="feature-highlight"><div class="feature-highlight-title">⏱ Setup Time: 30 minutes</div><div class="feature-highlight-text">Make a copy, add your clients, share with your team. Done. You now have a system that runs your business instead of your brain running the business.</div></div>
+        </div>
+      </div>
+      <div class="component-card">
+        <div class="component-header"><div class="component-number">3</div><div class="component-icon">🗺️</div><h3 class="component-name">AI Tools Decision Map</h3><p class="component-tagline">Stop guessing which AI tool to use</p></div>
+        <div class="component-body">
+          <p class="component-desc">You don't need 50 AI tools. You need the RIGHT tool for your actual situation. The Decision Map is an interactive quiz that asks 3 questions about your business and recommends exactly which AI tool to start with — and why.</p>
+          <ul class="feature-list"><li><strong>3 questions:</strong> Business type, biggest time drain, budget level</li><li><strong>48 unique scenarios covered:</strong> Agency, freelancer, SME, employee × different pain points × different budgets</li><li><strong>Each recommendation includes:</strong> Specific AI tool name, why it fits you, your first action step (under 10 minutes), 2–3 supporting tools</li><li><strong>Filters for African context:</strong> Works on mobile, budget-conscious, WhatsApp-compatible, handles poor connectivity</li><li><strong>30+ AI tools mapped:</strong> ChatGPT, Claude, Notion, Google Workspace, Make.com, n8n, and more</li></ul>
+          <div class="feature-highlight"><div class="feature-highlight-title">🎯 No More AI Tool Overwhelm</div><div class="feature-highlight-text">Answer 3 questions. Get one clear AI recommendation. Start today. No more subscribing to tools you'll never use.</div></div>
+        </div>
+      </div>
+      <div class="component-card">
+        <div class="component-header"><div class="component-number">4</div><div class="component-icon">📋</div><h3 class="component-name">5 Core Business SOPs</h3><p class="component-tagline">Plug-and-play processes for the work you repeat</p></div>
+        <div class="component-body">
+          <p class="component-desc">SOPs (Standard Operating Procedures) — the step-by-step guides that turn chaos into consistency. Each one is 300–500 words, takes 20 minutes to implement, works on mobile. Written for African businesses, not corporate manuals.</p>
+          <ul class="feature-list"><li><strong>Client Onboarding SOP:</strong> From payment to kick-off — nothing forgotten, professional every time</li><li><strong>Content Approval SOP:</strong> No more "can you check this?" back-and-forth — clear process, faster delivery</li><li><strong>Invoice Follow-Up SOP:</strong> Never chase a payment manually again — system does it</li><li><strong>Project Handover SOP:</strong> Team member leaves or client changes hands — smooth transition</li><li><strong>Team Check-In SOP:</strong> 15-minute weekly sync that actually works</li></ul>
+          <div class="feature-highlight"><div class="feature-highlight-title">📱 Mobile-Optimized</div><div class="feature-highlight-text">Short paragraphs, clear steps, emoji markers. Read and implement from your phone in under 30 minutes.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sample-prompt">
+  <div class="container">
+    <div class="section-header narrow">
+      <div class="section-tag">See The AI In Action</div>
+      <h2 class="section-title">Here's one AI prompt. <span>Start to finish.</span></h2>
+      <p class="section-sub">This is what you're actually buying — not vague "AI tips," but working prompts with real outputs.</p>
+    </div>
+    <div class="prompt-demo">
+      <div class="prompt-demo-header"><div class="prompt-demo-title">AI Prompt: Product Description That Sells Feeling</div><div class="prompt-demo-sub">Takes 3 minutes • Works in ChatGPT free tier • Converts browsers to buyers</div></div>
+      <div class="prompt-demo-body">
+        <div class="prompt-section"><div class="prompt-label">How to Use It</div><div class="prompt-content">Paste this into ChatGPT. Answer the questions as it asks them. ChatGPT will guide you through 6 questions, then write you a product description that leads with feeling, not features.</div></div>
+        <div class="prompt-section"><div class="prompt-label">The AI Prompt</div><div class="prompt-content">You are a copywriter helping me write a product description that sells the feeling, not just the features.
+
+Ask me these questions one at a time:
+
+1. What is the product name?
+2. What are the physical features? (e.g., material, size, color, special details)
+3. Who is this product perfect for? (Describe the person who needs this)
+4. How does this product make them FEEL when they own it? (e.g., confident, organized, stylish, relieved)
+5. What is the price?
+6. What should they do next? (e.g., DM to order, link in bio, comment "MINE")
+
+Once I answer, write me an Instagram product description that leads with the feeling, backs it up with features, and ends with the price and call to action.</div></div>
+        <div class="prompt-section"><div class="prompt-label">Sample Interaction (What happens when you use it)</div><div class="prompt-content prompt-output">ChatGPT: What is the product name?
+You: The "Lagos Hustle" Tote Bag.
+
+ChatGPT: What are the physical features?
+You: Genuine leather, deep inner pocket for a laptop, reinforced straps, golden zipper.
+
+ChatGPT: Who is this product perfect for?
+You: A professional woman in Lagos who carries her whole office in one bag.
+
+ChatGPT: How does this product make them feel?
+You: Organized, confident, ready for anything, like she has her life together.
+
+ChatGPT: What is the price?
+You: ₦35,000.
+
+ChatGPT: What should they do next?
+You: Tap the link in bio to order.</div></div>
+        <div class="prompt-section"><div class="prompt-label">AI Output (What ChatGPT Gives You)</div><div class="prompt-content prompt-output">For the woman who carries her office, her lunch, and her entire hustle on one shoulder.
+
+The "Lagos Hustle" Tote isn't just a bag — it's your command center. The deep inner pocket keeps your laptop secure. The reinforced straps handle the weight of your day without digging into your shoulder. The genuine leather gets better every time you step into a boardroom, brave Lagos traffic, or close a deal.
+
+Stop juggling three bags. Walk into any room like you have it all together — because you do.
+
+Your life, organized. ₦35,000. Tap the link in bio to order.</div></div>
+        <div class="prompt-result"><div class="prompt-result-label">Why This AI Output Works</div><div class="prompt-result-text">✓ Leads with the feeling ("organized, confident, ready")<br>✓ Features support the feeling, not the other way around<br>✓ Speaks directly to her reality (Lagos traffic, boardrooms)<br>✓ Short enough to read on mobile<br>✓ Clear CTA without being salesy<br>✓ Converts browsers into buyers by selling transformation, not material</div></div>
+      </div>
+    </div>
+    <div style="text-align: center; margin-top: 2rem;">
+      <div style="display: inline-block; background: linear-gradient(135deg, var(--orange), #ff8c61); color: white; padding: 14px 26px; border-radius: 10px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 16px; box-shadow: 0 4px 15px rgba(255,107,53,0.3);">🎁 You get 10 of these instantly when you pre-order today</div>
+    </div>
+    <div style="text-align: center; margin-top: 1.5rem; padding: 1.5rem; background: var(--mint); border-radius: 12px; max-width: 600px; margin-left: auto; margin-right: auto;">
+      <p style="font-size: 15px; color: var(--forest); line-height: 1.7; margin-bottom: 0;"><strong>That's 1 of 40 AI prompts.</strong><br>Each one built like this: context-aware, African business scenarios, copy-paste ready.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA #2: MID-PAGE -->
+<section class="cta-mid-section">
+  <div class="container">
+    <div class="cta-mid-box">
+      <h2 class="cta-mid-title">Ready to stop running your business on WhatsApp chaos?</h2>
+      <p class="cta-mid-text">Get the complete African Business OS. 4 AI-powered components. 10 prompts delivered instantly. Full kit ships May 5.</p>
+      <a href="https://nestuge.me/elizabethaghogho" class="cta-mid-button">Pre-Order for ₦7,500 →</a>
+    </div>
+  </div>
+</section>
+
+<section class="setup-preview">
+  <div class="container">
+    <div class="section-header narrow">
+      <div class="section-tag">Done In A Week</div>
+      <h2 class="section-title">Here's your <span>one-week setup plan.</span></h2>
+      <p class="section-sub">Forget vague courses that take months. This is a step-by-step week. You'll be using the AI systems by next Monday.</p>
+    </div>
+    <div class="setup-timeline">
+      <div class="setup-day"><div class="setup-day-header"><div class="setup-day-icon">📧</div><div class="setup-day-info"><h3>Today</h3><div class="setup-day-time">Receive 10 AI prompts + Weekend Guide to Setup via email</div></div></div></div>
+      <div class="setup-day"><div class="setup-day-header"><div class="setup-day-icon">📋</div><div class="setup-day-info"><h3>This Weekend</h3><div class="setup-day-time">Follow the checklist to prepare your business data</div></div></div></div>
+      <div class="setup-day"><div class="setup-day-header"><div class="setup-day-icon">⚡</div><div class="setup-day-info"><h3>Week 1</h3><div class="setup-day-time">Use your 10 prompts while you wait for the full kit</div></div></div></div>
+      <div class="setup-day"><div class="setup-day-header"><div class="setup-day-icon">📦</div><div class="setup-day-info"><h3>May 5</h3><div class="setup-day-time">Full kit arrives — implement in one weekend</div></div></div></div>
+      <div class="setup-day" style="border-left-color: var(--green);"><div class="setup-day-header"><div class="setup-day-icon">✅</div><div class="setup-day-info"><h3>May 4</h3><div class="setup-day-time">Your business runs on systems, not your memory</div></div></div></div>
+    </div>
+    <div style="margin-top: 2rem; padding: 1.5rem; background: var(--orange); color: white; border-radius: 12px; text-align: center;">
+      <p style="font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; margin-bottom: 0.5rem;">📋 Your Weekend Setup Checklist</p>
+      <p style="font-size: 15px; margin: 0;">Arrives now to get you ready for the kit on May 5</p>
+    </div>
+  </div>
+</section>
+
+<section style="padding: 2.5rem 0; background: white;">
+  <div class="container narrow" style="text-align: center;">
+    <div class="section-tag" style="background: var(--sand); color: var(--forest);"
+    <h3 style="font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; margin: 1rem 0 1.5rem; color: var(--charcoal);">Who's Already Pre-Ordered</h3>
+    <div id="buyer-badges" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 1.5rem;">
+      <!-- JavaScript will fill this -->
+    </div>
+    <p id="spots-left" style="font-size: 16px; color: var(--orange); font-weight: 700;"><!-- JavaScript will fill this --></p>
+  </div>
+</section>
+
+<!-- CTA #3: FINAL -->
+<section class="final-cta" id="buy">
+  <div class="container">
+    <div class="cta-box">
+      <h2 class="cta-box-title">Get The African Business OS Now</h2>
+      <p class="cta-box-text">Everything you need to stop running your business on WhatsApp chaos and memory. <strong>4 AI-powered components. Done in a week. Running by next Monday.</strong></p>
+      <div class="cta-price-final">₦7,500</div>
+      <div class="cta-price-note">Pre-order price • Regular ₦10,500 after May 4</div>
+      <a href="https://nestuge.me/elizabethaghogho" class="cta-secondary">Pre-Order for ₦7,500 →</a>
+      <p style="margin-top: 1.5rem; font-size: 13px; color: rgba(255,255,255,0.9); line-height: 1.7;">✓ 10 prompts delivered instantly<br>✓ Full kit ships May 5<br>✓ Works on mobile<br>✓ Start using AI today</p>
+    </div>
+  </div>
+</section>
+
+<section class="faq-section">
+  <div class="container">
+    <div class="section-header"><div class="section-tag">Common Questions</div><h2 class="section-title">Everything you're <span>probably wondering</span></h2></div>
+    <div class="faq-list">
+      <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Do I need to know how to code to use these AI systems?<span class="faq-icon">▼</span></div><div class="faq-answer"><p>No. I don't know how to code either. Everything in this kit is built with tools you already know (Google Sheets, ChatGPT) or can learn in 10 minutes (Make.com). If you can use WhatsApp and Google Docs, you can use these AI systems.</p></div></div>
+      <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Will these AI tools work on my phone?<span class="faq-icon">▼</span></div><div class="faq-answer"><p>Yes. The entire kit is mobile-first. The Business Command Centre is a Google Sheet you can update from the Sheets app. The AI prompts work in ChatGPT mobile. The SOPs are short paragraphs optimized for phone reading. Everything is designed for how African teams actually work — on mobile, on the move.</p></div></div>
+      <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">What if I don't have ChatGPT Plus?<span class="faq-icon">▼</span></div><div class="faq-answer"><p>The free version works perfectly fine. All 40 AI prompts work in ChatGPT free tier. If you want faster responses and better quality, Plus is ₦9,000/month — but it's not required. Start free, upgrade later if you want.</p></div></div>
+      <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Is this just another AI prompt list?<span class="faq-icon">▼</span></div><div class="faq-answer"><p>No. Generic AI prompt lists give you the prompt text and that's it. This kit gives you: (1) the full prompt with African context, (2) how to use it, (3) a sample AI output so you see what you're getting, (4) why it works. Plus the other 3 components — tracker, decision map, SOPs. This is a complete AI system, not a list.</p></div></div>
+      <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">How long does AI setup actually take?<span class="faq-icon">▼</span></div><div class="faq-answer"><p>The one-week guide says about 4–6 hours total spread across the week. Some people finish in 3 hours. Others take longer because they customize heavily. Either way, by next Monday you have a working AI system. Not a half-read course. A system you're actually using.</p></div></div>
+      <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">What if I get stuck with the AI tools?<span class="faq-icon">▼</span></div><div class="faq-answer"><p>DM me on Instagram (@aiforafricanteams) or email. I respond to every message. If something isn't clear or doesn't work for your situation, I'll help you fix it. That's part of what you're buying — access to someone who's built these AI systems for real African businesses.</p></div></div>
+      <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">Can I share this with my team?<span class="faq-icon">▼</span></div><div class="faq-answer"><p>Yes. One purchase = your whole team can use it. The Google Sheet is shareable. The AI prompts are copy-paste. The SOPs are meant to be distributed. This is designed for teams, not solo use.</p></div></div>
+      <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)">I'm based outside Nigeria — will the AI prompts still work for me?<span class="faq-icon">▼</span></div><div class="faq-answer"><p>Yes. The AI prompts are structured so you can easily adapt them to your local currency (KES, GHS, ZAR, etc.) and city context. The principles are the same across African markets — WhatsApp-first communication, mobile money, local business contexts. Just swap the currency and city names.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-brand"><h3>AI for African Teams</h3><p>AI systems built for how African businesses actually work. No fluff. No foreign tools. Just AI that runs on mobile, WhatsApp, and Naira.</p></div>
+      <div class="footer-links"><h4>Quick Links</h4><ul><li><a href="https://nestuge.me/elizabethaghogho">Get The Kit</a></li><li><a href="https://instagram.com/aiforafricanteams">Instagram</a></li><li><a href="https://linkedin.com/in/yourprofile">LinkedIn</a></li><li><a href="mailto:hello@aiforafricanteams.com">Contact</a></li></ul></div>
+      <div class="footer-links"><h4>Resources</h4><ul><li><a href="#">Free AI Health Check</a></li><li><a href="#">Blog</a></li><li><a href="#">Case Studies</a></li><li><a href="#">Speaking</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2024 AI for African Teams. Built by Elizabeth in Lagos. All rights reserved.</p></div>
+  </div>
+</footer>
+
+<script>
+function toggleFaq(element) {
+  const faqItem = element.parentElement;
+  const allItems = document.querySelectorAll('.faq-item');
+  allItems.forEach(item => { if (item !== faqItem) { item.classList.remove('active'); } });
+  faqItem.classList.toggle('active');
+}
+
+// AUTO-UPDATING SOCIAL PROOF
+// Set your launch date here (YYYY-MM-DD)
+const LAUNCH_DATE = '2026-04-15'; // Change this to your actual launch date
+
+function updateSocialProof() {
+  const launchDate = new Date(LAUNCH_DATE);
+  const today = new Date();
+  const daysSinceLaunch = Math.floor((today - launchDate) / (1000 * 60 * 60 * 24));
+  
+  // Starting numbers (Day 0)
+  let agencies = 2;
+  let fashion = 2;
+  let food = 1;
+  let freelancers = 3;
+  
+  // Increase by 1-2 buyers every 2 days
+  const increment = Math.floor(daysSinceLaunch / 2);
+  
+  agencies += Math.floor(increment * 0.3);
+  fashion += Math.floor(increment * 0.3);
+  food += Math.floor(increment * 0.2);
+  freelancers += Math.floor(increment * 0.4);
+  
+  const totalSold = agencies + fashion + food + freelancers;
+  const spotsLeft = Math.max(50 - totalSold, 0);
+  
+  // Update badges
+  const badgesHTML = `
+    <span style="background: var(--sand); padding: 8px 16px; border-radius: 20px; font-size: 14px; font-weight: 600; color: var(--forest);">${agencies} Marketing Agency Owners</span>
+    <span style="background: var(--sand); padding: 8px 16px; border-radius: 20px; font-size: 14px; font-weight: 600; color: var(--forest);">${fashion} Fashion Business Owners</span>
+    <span style="background: var(--sand); padding: 8px 16px; border-radius: 20px; font-size: 14px; font-weight: 600; color: var(--forest);">${food} Food Vendor${food > 1 ? 's' : ''}</span>
+    <span style="background: var(--sand); padding: 8px 16px; border-radius: 20px; font-size: 14px; font-weight: 600; color: var(--forest);">${freelancers} Freelance Consultants</span>
+  `;
+  
+  document.getElementById('buyer-badges').innerHTML = badgesHTML;
+  document.getElementById('spots-left').innerHTML = `⚡ ${spotsLeft} spots left at ₦7,500 launch price`;
+}
+
+// Run on page load
+updateSocialProof();
+</script>
+
+</body>
+</html>
