@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Is your business AI-ready? • Free AI Health Check</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --orange: #FF6B35;
+  --gold: #FFBE0B;
+  --forest: #1B4332;
+  --green: #2D6A4F;
+  --warm: #F8F4EF;
+  --sand: #F0E6D3;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Instrument Sans', sans-serif;
+  background: var(--warm);
+  color: #2C2C2A;
+  line-height: 1.6;
+}
+
+.container { max-width: 780px; margin: 0 auto; padding: 20px; }
+
+.hero {
+  background: linear-gradient(135deg, var(--forest), #234B3A);
+  color: white;
+  padding: 2.5rem 1.5rem;
+  border-radius: 16px;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.hero-tag {
+  background: var(--orange);
+  color: white;
+  font-family: 'Syne', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 6px 14px;
+  border-radius: 30px;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: 2.1rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+}
+
+.hero h1 span { color: var(--gold); }
+
+.hero p {
+  font-size: 1.05rem;
+  opacity: 0.95;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.intro-box {
+  background: #FEF4E9;
+  border-left: 4px solid var(--orange);
+  padding: 1.25rem;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+}
+
+.question-card {
+  background: white;
+  border-radius: 14px;
+  padding: 1.75rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+}
+
+.q-number {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--orange);
+  margin-bottom: 0.75rem;
+}
+
+.q-text {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 1.25rem;
+}
+
+.options {
+  display: flex;
+  gap: 12px;
+}
+
+.btn {
+  flex: 1;
+  padding: 14px 20px;
+  border: 2px solid #e5e5e5;
+  background: white;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn.selected-yes {
+  background: #D8F3DC;
+  border-color: var(--green);
+  color: var(--forest);
+}
+
+.btn.selected-no {
+  background: #FEE2E2;
+  border-color: #EF4444;
+  color: #991B1B;
+}
+
+.solution {
+  margin-top: 1.25rem;
+  padding: 1.25rem;
+  border-radius: 10px;
+  display: none;
+}
+
+.solution.instant {
+  background: #D8F3DC;
+  border: 1px solid var(--green);
+}
+
+.solution.kit {
+  background: #FEF4E9;
+  border: 1px solid var(--orange);
+}
+
+.solution-tag {
+  font-family: 'Syne', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-bottom: 0.75rem;
+}
+
+.solution.instant .solution-tag { background: var(--green); color: white; }
+.solution.kit .solution-tag { background: var(--orange); color: white; }
+
+.solution-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--forest);
+}
+
+.solution-text {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: #3D3D3D;
+}
+
+.score-card {
+  background: var(--forest);
+  color: white;
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  margin: 2.5rem 0;
+}
+
+.score-label {
+  font-size: 13px;
+  opacity: 0.8;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+
+.score-number {
+  font-family: 'Syne', sans-serif;
+  font-size: 4.5rem;
+  font-weight: 800;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.score-message {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto 1.5rem;
+}
+
+.cta-button {
+  display: inline-block;
+  background: var(--orange);
+  color: white;
+  font-family: 'Syne', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 16px 40px;
+  border-radius: 12px;
+  text-decoration: none;
+  margin-top: 1rem;
+  box-shadow: 0 6px 20px rgba(255,107,53,0.4);
+}
+
+.cta-button.consulting {
+  background: white;
+  color: var(--forest);
+}
+
+.footer {
+  text-align: center;
+  padding: 2rem 0;
+  color: #666;
+  font-size: 13px;
+}
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.8rem; }
+  .score-number { font-size: 3.5rem; }
+  .options { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="hero">
+    <div class="hero-tag">FREE TOOL — AI FOR AFRICAN TEAMS</div>
+    <h1>Is your business <span>AI-ready?</span></h1>
+    <p class="hero-subtitle">10 honest yes/no questions. Every No gives you an immediate fix you can apply today — plus your full readiness score.</p>
+  </div>
+
+  <div class="intro-box">
+    Answer each question honestly. Every <strong>No</strong> reveals a fix you can apply today. Some are instant. Some are inside the African Business OS kit.
+  </div>
+
+  <div id="questions"></div>
+
+  <div class="score-card" id="score-card" style="display:none;">
+    <div class="score-label">YOUR AI READINESS SCORE</div>
+    <div class="score-number" id="score-number">0 / 10</div>
+    <div class="score-message" id="score-text"></div>
+    <!-- UPDATED LINK: now points to your GitHub Pages site -->
+    <a href="https://iscalidafrica-tech.github.io/AfricaBusinessOS/" class="cta-button" id="main-cta">See the Full System →</a>
+  </div>
+
+  <div class="footer">
+    Built by Elizabeth • AI Systems Architect<br>
+    Lagos, Nigeria
+  </div>
+</div>
+
+<script>
+const questions = [
+  {
+    id: 1,
+    text: "Do you know which repeating tasks in your business could be automated with free AI tools today?",
+    type: "instant",
+    solution: "Map your tasks in 30 minutes — then ask AI. Open a blank document, list every task that happens more than once a week, then paste it into ChatGPT with this prompt: \"Here are my repeating business tasks: [list]. Which of these could be automated with free tools, and what tool would you recommend for each?\""
+  },
+  {
+    id: 2,
+    text: "When you use ChatGPT or another AI tool, do you get outputs you can actually use — or do they feel generic and off?",
+    type: "instant",
+    solution: "Stop asking vague questions. Always give context first. Before every prompt, add: \"I run a [business type] in [your city]. My clients are [describe them]. Payments are in [local currency]. We communicate mainly via WhatsApp.\""
+  },
+  {
+    id: 3,
+    text: "Do you have a written process for how your team handles a new client — from \"yes\" to work starting?",
+    type: "instant",
+    solution: "Build your onboarding SOP in 20 minutes with ChatGPT. Prompt: \"Write a step-by-step client onboarding SOP for a [your business type] in [your city] with [X] team members. Include who sends what, when they send it, what needs to be set up, and what the client receives in the first 24 hours.\""
+  },
+  {
+    id: 4,
+    text: "Can you tell me the status of every active client right now — without opening WhatsApp or making a call?",
+    type: "kit",
+    solution: "You need a centralised client tracker. The African Business OS has this built and ready to duplicate — set it up in 30 minutes."
+  },
+  {
+    id: 5,
+    text: "Do you have an automated or systematic follow-up for unpaid invoices — or does it depend on someone remembering?",
+    type: "instant",
+    solution: "Set up a 3-step invoice follow-up system today. Use ChatGPT to write the messages in your tone and local currency. Save them and send on schedule."
+  },
+  {
+    id: 6,
+    text: "If you disappeared for one week, would your business keep running without you in every conversation?",
+    type: "kit",
+    solution: "Your business needs SOPs your team can follow without you. The African Business OS includes 5 core SOPs written for African teams."
+  },
+  {
+    id: 7,
+    text: "Does your team start every new project from a clear template — or mostly from scratch each time?",
+    type: "instant",
+    solution: "Build your project kickoff template in 15 minutes using ChatGPT with a strong context prompt."
+  },
+  {
+    id: 8,
+    text: "Are you using AI tools that were built with African business contexts in mind — or generic Western tools that often miss the mark?",
+    type: "instant",
+    solution: "Add African context to every prompt. Always start with your business type, city, currency, and WhatsApp communication style."
+  },
+  {
+    id: 9,
+    text: "Does your team have one central place — not WhatsApp, not email — where all project information, tasks, and deadlines live?",
+    type: "kit",
+    solution: "You need a Business Command Centre. The AI African Business OS has this ready to duplicate — set it up in 30 minutes this weekend."
+  },
+  {
+    id: 10,
+    text: "Do you review your business performance at the end of every week — clients, payments, tasks, and priorities?",
+    type: "kit",
+    solution: "Start a 10-minute Friday review using a structured AI prompt every week. The African Business OS includes a weekly review template."
+  }
+];
+
+let score = 0;
+const answers = {};
+
+function renderQuestions() {
+  const container = document.getElementById('questions');
+  container.innerHTML = '';
+
+  questions.forEach((q) => {
+    const div = document.createElement('div');
+    div.className = 'question-card';
+    div.innerHTML = `
+      <div class="q-number">0${q.id}</div>
+      <div class="q-text">${q.text}</div>
+      <div class="options">
+        <button class="btn btn-yes" onclick="answer(${q.id}, true, this)">Yes</button>
+        <button class="btn btn-no" onclick="answer(${q.id}, false, this)">No</button>
+      </div>
+      <div class="solution ${q.type}" id="sol-${q.id}"></div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+function answer(id, isYes, button) {
+  const card = button.parentElement.parentElement;
+  const buttons = card.querySelectorAll('.btn');
+  const solutionBox = document.getElementById(`sol-${id}`);
+
+  buttons.forEach(btn => btn.classList.remove('selected-yes', 'selected-no'));
+
+  if (isYes) {
+    button.classList.add('selected-yes');
+    solutionBox.style.display = 'none';
+  } else {
+    button.classList.add('selected-no');
+    const q = questions.find(item => item.id === id);
+    solutionBox.innerHTML = `
+      <div class="solution-tag">${q.type === 'instant' ? '⚡ DO THIS NOW' : '🛠 KIT FIX'}</div>
+      <div class="solution-title">${q.type === 'instant' ? 'Immediate Action' : 'Fix Inside The Kit'}</div>
+      <div class="solution-text">${q.solution}</div>
+    `;
+    solutionBox.style.display = 'block';
+  }
+
+  answers[id] = isYes;
+  score = Object.values(answers).filter(ans => ans === true).length;
+  updateFinalScore();
+}
+
+function updateFinalScore() {
+  const scoreCard = document.getElementById('score-card');
+  const scoreNum = document.getElementById('score-number');
+  const scoreMsg = document.getElementById('score-text');
+  const cta = document.getElementById('main-cta');
+
+  scoreNum.textContent = `${score} / 10`;
+  scoreCard.style.display = 'block';
+
+  let message = '';
+  let ctaText = 'See the Full System →';
+  let isConsulting = false;
+
+  if (score <= 2) {
+    message = "Your business is running on chaos. Every client is a scramble. Follow-ups are being missed. Money is walking out the door because there's no system tracking it. You're not one missed WhatsApp message away from losing a client — you've probably already lost one this month and don't even know why. The African Business OS fixes all 4 gaps you just identified.";
+  } else if (score <= 5) {
+    message = "You've started building systems, but half your business still runs on your memory. The gaps you just identified are bleeding time and money every single week. A missed invoice here. A dropped client there. It adds up faster than you think. The African Business OS closes every gap you saw.";
+  } else if (score <= 7) {
+    message = "You're running a structured business. But the holes are still there. Right now, they're manageable because you're small. When you try to scale — hire one more person, take on three more clients — these gaps will break you. The African Business OS plugs the remaining holes before you scale.";
+  } else if (score <= 9) {
+    message = "You're ahead of most African businesses. You have systems. You have structure. One or two gaps are all that stand between you and a business that runs without you being in every conversation. The African Business OS fills those last gaps.";
+  } else {
+    message = "You don't need templates. You need custom-built systems. You're ready for a proper AI systems architect to design your operational backbone.";
+    ctaText = "DM me ARCHITECT";
+    isConsulting = true;
+  }
+
+  scoreMsg.textContent = message;
+  cta.textContent = ctaText;
+  
+  if (isConsulting) {
+    cta.href = "https://instagram.com/aiforafricanteams";
+    cta.classList.add('consulting');
+  } else {
+    // UPDATED LINK: your GitHub Pages site
+    cta.href = "https://iscalidafrica-tech.github.io/AfricaBusinessOS/";
+    cta.classList.remove('consulting');
+  }
+}
+
+renderQuestions();
+</script>
+
+</body>
+</html>
