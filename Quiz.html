@@ -1,0 +1,1934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Revenue Leak Calculator | AI for African Teams</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .quiz-container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+            max-width: 600px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .quiz-header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 32px 28px 24px;
+            color: white;
+        }
+
+        .quiz-header .brand {
+            font-size: 12px;
+            color: #25D366;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .quiz-header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 10px;
+        }
+
+        .quiz-header p {
+            font-size: 14px;
+            color: #a0aec0;
+            line-height: 1.6;
+        }
+
+        .progress-bar-container {
+            background: #e2e8f0;
+            height: 4px;
+            width: 100%;
+        }
+
+        .progress-bar {
+            background: #25D366;
+            height: 4px;
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        .quiz-body {
+            padding: 32px 28px;
+        }
+
+        .step {
+            display: none;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        .step-label {
+            font-size: 11px;
+            color: #25D366;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .step h2 {
+            font-size: 20px;
+            color: #1a1a2e;
+            font-weight: 700;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .step .sub {
+            font-size: 13px;
+            color: #718096;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .options-grid.single-col {
+            grid-template-columns: 1fr;
+        }
+
+        .option-btn {
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 14px 16px;
+            text-align: left;
+            cursor: pointer;
+            font-size: 14px;
+            color: #2d3748;
+            transition: all 0.2s ease;
+            line-height: 1.4;
+            font-family: inherit;
+        }
+
+        .option-btn:hover {
+            border-color: #25D366;
+            background: #f0fff4;
+            color: #1a1a2e;
+        }
+
+        .option-btn.selected {
+            border-color: #25D366;
+            background: #f0fff4;
+            color: #1a1a2e;
+            font-weight: 600;
+        }
+
+        .option-btn .emoji {
+            display: block;
+            font-size: 20px;
+            margin-bottom: 6px;
+        }
+
+        .next-btn {
+            background: #25D366;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 16px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .next-btn:hover {
+            background: #128C7E;
+            transform: translateY(-1px);
+        }
+
+        .next-btn:disabled {
+            background: #cbd5e0;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            color: #718096;
+            font-size: 13px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            padding: 0;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .back-btn:hover {
+            color: #1a1a2e;
+        }
+
+        /* Contact Form */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 6px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #2d3748;
+            font-family: inherit;
+            transition: border-color 0.2s ease;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: #25D366;
+        }
+
+        .form-note {
+            font-size: 11px;
+            color: #a0aec0;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        /* Results Page */
+        .results-header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .results-header .leak-amount {
+            font-size: 48px;
+            font-weight: 800;
+            color: #e53e3e;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .results-header .leak-label {
+            font-size: 14px;
+            color: #718096;
+        }
+
+        .results-card {
+            background: #f7fafc;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .results-card h3 {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #718096;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .pain-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .pain-item .dot {
+            width: 8px;
+            height: 8px;
+            background: #e53e3e;
+            border-radius: 50%;
+            margin-top: 5px;
+            flex-shrink: 0;
+        }
+
+        .pain-item p {
+            font-size: 14px;
+            color: #2d3748;
+            line-height: 1.5;
+        }
+
+        .package-card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .package-card h3 {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #25D366;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .package-card .package-name {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .package-card .package-price {
+            font-size: 14px;
+            color: #a0aec0;
+        }
+
+        .cta-btn {
+            background: #25D366;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 18px 32px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .cta-btn:hover {
+            background: #128C7E;
+            transform: translateY(-1px);
+        }
+
+        .cta-secondary {
+            text-align: center;
+            font-size: 12px;
+            color: #a0aec0;
+            line-height: 1.6;
+        }
+
+        /* Unqualified Results */
+        .unqualified-icon {
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .unqualified-card {
+            background: #fffaf0;
+            border: 2px solid #f6ad55;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .unqualified-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #744210;
+            margin-bottom: 8px;
+        }
+
+        .unqualified-card p {
+            font-size: 14px;
+            color: #975a16;
+            line-height: 1.6;
+        }
+
+        .os-card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .os-card .os-tag {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #25D366;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .os-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .os-card p {
+            font-size: 13px;
+            color: #a0aec0;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .os-price {
+            font-size: 28px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 4px;
+        }
+
+        .os-price span {
+            font-size: 14px;
+            color: #a0aec0;
+            font-weight: 400;
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .loading-spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid #e2e8f0;
+            border-top: 4px solid #25D366;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 16px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading p {
+            color: #718096;
+            font-size: 14px;
+        }
+
+        /* Calculating */
+        .calculating {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .calc-bar {
+            background: #e2e8f0;
+            border-radius: 4px;
+            height: 6px;
+            margin: 16px 0 8px;
+            overflow: hidden;
+        }
+
+        .calc-bar-inner {
+            background: #25D366;
+            height: 100%;
+            border-radius: 4px;
+            animation: calcProgress 2s ease forwards;
+        }
+
+        @keyframes calcProgress {
+            from { width: 0%; }
+            to { width: 100%; }
+        }
+
+        .calc-text {
+            font-size: 13px;
+            color: #718096;
+        }
+
+        @media (max-width: 480px) {
+            .quiz-header {
+                padding: 24px 20px 20px;
+            }
+            .quiz-body {
+                padding: 24px 20px;
+            }
+            .quiz-header h1 {
+                font-size: 20px;
+            }
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+            .results-header .leak-amount {
+                font-size: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <div class="quiz-header">
+        <div class="brand">AI for African Teams</div>
+        <h1>Find Out How Much Revenue You're Losing on WhatsApp Every Month</h1>
+        <p>2-minute quiz. Get your personalised revenue leak report instantly.</p>
+    </div>
+    <div class="progress-bar-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div class="quiz-body" id="quizBody">
+
+        <!-- STEP 1: Business Type -->
+        <div class="step active" id="step1">
+            <div class="step-label">Step 1 of 6</div>
+            <h2>What type of business do you run?</h2>
+            <p class="sub">Select the option that best describes you.</p>
+            <div class="options-grid">
+                <button class="option-btn" onclick="selectBusinessType(this, 'salon')">
+                    <span class="emoji">💇</span>Salon / Beauty Service
+                </button>
+                <button class="option-btn" onclick="selectBusinessType(this, 'gym')">
+                    <span class="emoji">🏋️</span>Gym / Fitness Center
+                </button>
+                <button class="option-btn" onclick="selectBusinessType(this, 'realestate')">
+                    <span class="emoji">🏠</span>Real Estate Agent
+                </button>
+                <button class="option-btn" onclick="selectBusinessType(this, 'hotel')">
+                    <span class="emoji">🏨</span>Hotel / Shortlet
+                </button>
+                <button class="option-btn" onclick="selectBusinessType(this, 'consultant')">
+                    <span class="emoji">💼</span>Consultant / Coach
+                </button>
+                <button class="option-btn" onclick="selectBusinessType(this, 'freelancer')">
+                    <span class="emoji">💻</span>Freelancer / Agency
+                </button>
+                <button class="option-btn" onclick="selectBusinessType(this, 'photographer')">
+                    <span class="emoji">📸</span>Photographer / Videographer
+                </button>
+                <button class="option-btn" onclick="selectBusinessType(this, 'eventplanner')">
+                    <span class="emoji">🎉</span>Event Planner
+                </button>
+                <button class="option-btn" onclick="selectBusinessType(this, 'school')">
+                    <span class="emoji">🎓</span>School / Tutoring Center
+                </button>
+                <button class="option-btn" onclick="selectBusinessType(this, 'logistics')">
+                    <span class="emoji">🚚</span>Logistics / Delivery
+                </button>
+                <button class="option-btn" onclick="selectBusinessType(this, 'security')">
+                    <span class="emoji">🔐</span>Security Company
+                </button>
+                <button class="option-btn" onclick="selectBusinessType(this, 'printing')">
+                    <span class="emoji">🖨️</span>Printing / Branding
+                </button>
+                <button class="option-btn" onclick="selectBusinessType(this, 'fashion')">
+                    <span class="emoji">👗</span>Fashion Vendor / Tailor
+                </button>
+                <button class="option-btn" onclick="selectBusinessType(this, 'restaurant')">
+                    <span class="emoji">🍽️</span>Restaurant / Food Business
+                </button>
+                <button class="option-btn" onclick="selectBusinessType(this, 'pharmacy')">
+                    <span class="emoji">💊</span>Pharmacy / Health Store
+                </button>
+                <button class="option-btn" onclick="selectBusinessType(this, 'supermarket')">
+                    <span class="emoji">🛒</span>Supermarket / Provision Store
+                </button>
+                <button class="option-btn" onclick="selectBusinessType(this, 'hairproduct')">
+                    <span class="emoji">✨</span>Hair Product / Beauty Brand
+                </button>
+                <button class="option-btn" onclick="selectBusinessType(this, 'hotel')">
+                    <span class="emoji">💳</span>Any Business Taking Payments
+                </button>
+            </div>
+        </div>
+
+        <!-- STEP 2: Dynamic Questions -->
+        <div class="step" id="step2">
+            <button class="back-btn" onclick="goBack(2)">← Back</button>
+            <div class="step-label">Step 2 of 6</div>
+            <h2 id="q2-title"></h2>
+            <p class="sub" id="q2-sub"></p>
+            <div class="options-grid single-col" id="q2-options"></div>
+            <button class="next-btn" id="next2" onclick="goToStep(3)" disabled>Continue →</button>
+        </div>
+
+        <!-- STEP 3: Dynamic Questions -->
+        <div class="step" id="step3">
+            <button class="back-btn" onclick="goBack(3)">← Back</button>
+            <div class="step-label">Step 3 of 6</div>
+            <h2 id="q3-title"></h2>
+            <p class="sub" id="q3-sub"></p>
+            <div class="options-grid single-col" id="q3-options"></div>
+            <button class="next-btn" id="next3" onclick="goToStep(4)" disabled>Continue →</button>
+        </div>
+
+        <!-- STEP 4: Dynamic Questions -->
+        <div class="step" id="step4">
+            <button class="back-btn" onclick="goBack(4)">← Back</button>
+            <div class="step-label">Step 4 of 6</div>
+            <h2 id="q4-title"></h2>
+            <p class="sub" id="q4-sub"></p>
+            <div class="options-grid single-col" id="q4-options"></div>
+            <button class="next-btn" id="next4" onclick="goToStep(5)" disabled>Continue →</button>
+        </div>
+
+        <!-- STEP 5: Qualification -->
+        <div class="step" id="step5">
+            <button class="back-btn" onclick="goBack(5)">← Back</button>
+            <div class="step-label">Step 5 of 6</div>
+            <h2>Almost there. Two quick questions.</h2>
+            <p class="sub">This helps us make sure your results are accurate.</p>
+
+            <h2 style="font-size:16px; margin-bottom:8px; margin-top:4px;">What is your approximate monthly revenue?</h2>
+            <div class="options-grid single-col" id="revenue-options">
+                <button class="option-btn" onclick="selectRevenue(this, 'under500k')">Under ₦500,000</button>
+                <button class="option-btn" onclick="selectRevenue(this, '500k-2m')">₦500,000 – ₦2,000,000</button>
+                <button class="option-btn" onclick="selectRevenue(this, '2m-5m')">₦2,000,000 – ₦5,000,000</button>
+                <button class="option-btn" onclick="selectRevenue(this, 'above5m')">Above ₦5,000,000</button>
+            </div>
+
+            <h2 style="font-size:16px; margin-bottom:8px; margin-top:20px;">Are you currently running paid ads?</h2>
+            <div class="options-grid single-col" id="ads-options">
+                <button class="option-btn" onclick="selectAds(this, 'yes')">Yes — Facebook, Instagram or Google Ads</button>
+                <button class="option-btn" onclick="selectAds(this, 'planning')">Not yet but planning to soon</button>
+                <button class="option-btn" onclick="selectAds(this, 'no')">No — I get customers organically</button>
+            </div>
+
+            <button class="next-btn" id="next5" onclick="goToStep(6)" disabled style="margin-top:20px;">Continue →</button>
+        </div>
+
+        <!-- STEP 6: Contact Collection -->
+        <div class="step" id="step6">
+            <button class="back-btn" onclick="goBack(6)">← Back</button>
+            <div class="step-label">Step 6 of 6</div>
+            <h2>Where should we send your results?</h2>
+            <p class="sub">Your personalised revenue leak report is being calculated. Enter your details to see it.</p>
+
+            <div class="calculating">
+                <p style="font-size:13px; color:#718096;">Calculating your revenue leak...</p>
+                <div class="calc-bar"><div class="calc-bar-inner"></div></div>
+                <p class="calc-text" id="calcText">Analysing your WhatsApp inquiry data...</p>
+            </div>
+
+            <div class="form-group">
+                <label>First Name *</label>
+                <input type="text" id="fname" placeholder="e.g. Chioma" />
+            </div>
+            <div class="form-group">
+                <label>Email Address *</label>
+                <input type="email" id="femail" placeholder="e.g. chioma@gmail.com" />
+            </div>
+            <div class="form-group">
+                <label>WhatsApp Number *</label>
+                <input type="tel" id="fphone" placeholder="e.g. 08012345678" />
+            </div>
+            <p class="form-note">🔒 Your details are safe. We do not share your information with anyone. You will receive your results on WhatsApp within 60 seconds.</p>
+            <button class="next-btn" id="submitBtn" onclick="submitQuiz()">See My Revenue Leak Report →</button>
+        </div>
+
+        <!-- LOADING -->
+        <div class="step" id="stepLoading">
+            <div class="loading">
+                <div class="loading-spinner"></div>
+                <p>Generating your personalised report...</p>
+            </div>
+        </div>
+
+        <!-- QUALIFIED RESULTS -->
+        <div class="step" id="stepQualified">
+            <div class="results-header">
+                <div style="font-size:13px; color:#718096; margin-bottom:8px;">Your estimated monthly revenue leak</div>
+                <div class="leak-amount" id="leakAmount">₦0</div>
+                <div class="leak-label">leaking from your business every month</div>
+            </div>
+
+            <div class="results-card">
+                <h3>Where You Are Losing Money</h3>
+                <div id="painPoints"></div>
+            </div>
+
+            <div class="package-card">
+                <h3>Recommended Solution</h3>
+                <div class="package-name" id="packageName"></div>
+                <div class="package-price" id="packagePrice"></div>
+            </div>
+
+            <p style="font-size:14px; color:#2d3748; margin-bottom:16px; line-height:1.6;">
+                <strong>The WhatsApp Automation System is built for businesses doing at least ₦500k/month with consistent customer inquiries.</strong> If that describes you, the 15-minute call below is worth your time.
+            </p>
+
+            <a href="https://calendly.com/elizabethawekpe/new-meeting" target="_blank" class="cta-btn">
+                📅 Book Your Free 15-Minute Call
+            </a>
+            <p class="cta-secondary">Check your WhatsApp — your full results have been sent to you.<br>Limited spots available each month.</p>
+        </div>
+
+        <!-- UNQUALIFIED RESULTS -->
+        <div class="step" id="stepUnqualified">
+            <div class="unqualified-icon">📊</div>
+            <h2 style="text-align:center; margin-bottom:8px; font-size:20px;">Your Results Are Ready</h2>
+            <p style="text-align:center; font-size:14px; color:#718096; margin-bottom:24px;">Based on your answers, here is where your business stands right now.</p>
+
+            <div class="unqualified-card">
+                <h3>You Are Leaving Money on the Table</h3>
+                <p>Your business is losing inquiries and revenue through WhatsApp — but right now, the best first step is not full automation. It is getting the right systems and processes in place first.</p>
+            </div>
+
+            <div class="os-card">
+                <div class="os-tag">Perfect for Where You Are Now</div>
+                <h3>African Business OS</h3>
+                <p>Templates, SOPs, AI prompts and a business command centre built specifically for Nigerian businesses. Everything you need to get organised and stop losing money manually — before you automate.</p>
+                <div class="os-price">₦7,500 <span>one-time</span></div>
+            </div>
+
+            <a href="https://iscalidafrica-tech.github.io/AfricaBusinessOS/" target="_blank" class="cta-btn">
+                Get the African Business OS →
+            </a>
+            <p class="cta-secondary">When your business is ready to scale with full automation, come back and take the quiz again.</p>
+        </div>
+
+    </div>
+</div>
+
+<script>
+// ============================================
+// CONFIGURATION — REPLACE THESE BEFORE GOING LIVE
+// ============================================
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxuprWnwCbcD8-DkHjBYNpyc2JPWXXwHTowmMUpxA6rQ5QnguAb0tICaZmCGrdoc8xC/exec";
+const WATI_API_URL = "YOUR_WATI_API_ENDPOINT_HERE";
+const WATI_API_TOKEN = "YOUR_WATI_API_TOKEN_HERE";
+const WATI_TEMPLATE_NAME = "revenue_leak_results";
+
+// ============================================
+// QUIZ STATE
+// ============================================
+let state = {
+    businessType: "",
+    businessLabel: "",
+    q2Answer: { value: "", score: 0 },
+    q3Answer: { value: "", score: 0 },
+    q4Answer: { value: "", score: 0 },
+    revenue: "",
+    runningAds: "",
+    name: "",
+    email: "",
+    phone: "",
+    leakAmount: 0,
+    qualified: false,
+    packageName: "",
+    packagePrice: "",
+    painPoints: []
+};
+
+// ============================================
+// QUESTION BANK PER BUSINESS TYPE
+// ============================================
+const questions = {
+    // SERVICE / BOOKING BUSINESSES
+    salon: {
+        package: "Cash Flow Accelerator",
+        price: "₦285,000 setup + ₦40,000/month",
+        avgValue: 8000,
+        q2: {
+            title: "How many appointments or bookings do you take per month?",
+            sub: "Include all services — hair, makeup, nails, etc.",
+            options: [
+                { label: "Less than 20 bookings", value: "under20", score: 1 },
+                { label: "20 – 50 bookings", value: "20-50", score: 2 },
+                { label: "50 – 100 bookings", value: "50-100", score: 3 },
+                { label: "More than 100 bookings", value: "100plus", score: 4 }
+            ]
+        },
+        q3: {
+            title: "What percentage of people who book actually show up?",
+            sub: "Be honest — this is where most salons lose money.",
+            options: [
+                { label: "Almost all of them (90%+)", value: "90plus", score: 1 },
+                { label: "About 80% show up", value: "80pct", score: 2 },
+                { label: "About 70% show up", value: "70pct", score: 3 },
+                { label: "Less than 70% show up", value: "under70", score: 4 }
+            ]
+        },
+        q4: {
+            title: "How do you currently confirm bookings and remind clients?",
+            sub: "This determines how much you can recover.",
+            options: [
+                { label: "I message each person manually", value: "manual", score: 3 },
+                { label: "I remind them sometimes when I remember", value: "sometimes", score: 4 },
+                { label: "I do not send reminders at all", value: "none", score: 5 },
+                { label: "I already have an automated system", value: "automated", score: 1 }
+            ]
+        },
+        calcLeak: function() {
+            let bookings = [10, 35, 75, 130][state.q2Answer.score - 1];
+            let noShowRate = [0.10, 0.20, 0.30, 0.35][state.q3Answer.score - 1];
+            let noShowLoss = bookings * noShowRate * this.avgValue;
+            let followUpMultiplier = [1, 1.2, 1.5, 1.8, 2.0][state.q4Answer.score - 1];
+            return Math.round(noShowLoss * followUpMultiplier);
+        },
+        painPoints: function() {
+            let points = [];
+            if (state.q3Answer.score >= 3) points.push("Your no-show rate is costing you significant revenue every month — each empty slot is money gone.");
+            if (state.q4Answer.score >= 3) points.push("Without automated reminders, clients forget and you lose that time slot with no warning.");
+            if (state.q2Answer.score >= 3) points.push("At your booking volume, manual management is unsustainable and errors are inevitable.");
+            if (points.length === 0) points.push("Even a small improvement in no-show rates and follow-up can recover significant monthly revenue.");
+            return points;
+        }
+    },
+
+    gym: {
+        package: "Cash Flow Accelerator",
+        price: "₦285,000 setup + ₦40,000/month",
+        avgValue: 15000,
+        q2: {
+            title: "How many trial sessions or new member sign-ups do you process per month?",
+            sub: "Include walk-ins, referrals and ad leads.",
+            options: [
+                { label: "Less than 15", value: "under15", score: 1 },
+                { label: "15 – 40", value: "15-40", score: 2 },
+                { label: "40 – 80", value: "40-80", score: 3 },
+                { label: "More than 80", value: "80plus", score: 4 }
+            ]
+        },
+        q3: {
+            title: "What percentage of people who book a trial session actually show up?",
+            sub: "No-shows are the gym industry's biggest hidden cost.",
+            options: [
+                { label: "Almost all of them (85%+)", value: "85plus", score: 1 },
+                { label: "About 75% show up", value: "75pct", score: 2 },
+                { label: "About 60% show up", value: "60pct", score: 3 },
+                { label: "Less than 60% show up", value: "under60", score: 4 }
+            ]
+        },
+        q4: {
+            title: "How do you currently collect monthly membership payments?",
+            sub: "Payment delays are a major gym cash flow killer.",
+            options: [
+                { label: "Members pay on time without chasing", value: "ontime", score: 1 },
+                { label: "I remind them manually sometimes", value: "manual", score: 3 },
+                { label: "I chase payments every month — it takes real time", value: "chase", score: 4 },
+                { label: "Payments are often late or I forget to follow up", value: "late", score: 5 }
+            ]
+        },
+        calcLeak: function() {
+            let trials = [8, 28, 60, 100][state.q2Answer.score - 1];
+            let noShowRate = [0.15, 0.25, 0.40, 0.45][state.q3Answer.score - 1];
+            let trialLoss = trials * noShowRate * this.avgValue;
+            let paymentMultiplier = [1, 1, 1.3, 1.6, 2.0][state.q4Answer.score - 1];
+            return Math.round(trialLoss * paymentMultiplier);
+        },
+        painPoints: function() {
+            let points = [];
+            if (state.q3Answer.score >= 3) points.push("High trial no-show rates mean your sales team's time is wasted and slots go unfilled.");
+            if (state.q4Answer.score >= 3) points.push("Chasing membership payments manually takes hours every month and damages client relationships.");
+            if (state.q2Answer.score >= 3) points.push("At your volume, you need a system — not a person — managing confirmations and reminders.");
+            if (points.length === 0) points.push("Automating your confirmation and payment system will free up significant time and reduce revenue loss.");
+            return points;
+        }
+    },
+
+    realestate: {
+        package: "Property Inquiry Accelerator",
+        price: "₦400,000 setup + ₦50,000/month",
+        avgValue: 150000,
+        q2: {
+            title: "How many WhatsApp property inquiries do you receive per month?",
+            sub: "Count all messages from ads, referrals and organic.",
+            options: [
+                { label: "Less than 30", value: "under30", score: 1 },
+                { label: "30 – 80", value: "30-80", score: 2 },
+                { label: "80 – 150", value: "80-150", score: 3 },
+                { label: "More than 150", value: "150plus", score: 4 }
+            ]
+        },
+        q3: {
+            title: "When a new inquiry comes in, how quickly do you typically respond?",
+            sub: "Speed of response is the number one factor in real estate conversion.",
+            options: [
+                { label: "Within 30 minutes always", value: "30min", score: 1 },
+                { label: "Within 1 – 3 hours", value: "1-3hrs", score: 2 },
+                { label: "Same day but sometimes later", value: "sameday", score: 3 },
+                { label: "Sometimes the next day or later", value: "nextday", score: 5 }
+            ]
+        },
+        q4: {
+            title: "What happens to leads who inquire but do not book a site visit immediately?",
+            sub: "This is where most agents lose deals.",
+            options: [
+                { label: "I follow up with them consistently for 7+ days", value: "consistent", score: 1 },
+                { label: "I follow up once or twice then move on", value: "once", score: 3 },
+                { label: "They usually just go cold — I get busy", value: "cold", score: 4 },
+                { label: "I do not have a follow-up system", value: "none", score: 5 }
+            ]
+        },
+        calcLeak: function() {
+            let inquiries = [15, 55, 115, 200][state.q2Answer.score - 1];
+            let responseMultiplier = [0.10, 0.20, 0.35, 0.55][state.q3Answer.score - 1];
+            let followUpMultiplier = [0.05, 0.05, 0.25, 0.35, 0.45][state.q4Answer.score - 1];
+            let totalLossRate = responseMultiplier + followUpMultiplier;
+            return Math.round(inquiries * totalLossRate * this.avgValue);
+        },
+        painPoints: function() {
+            let points = [];
+            if (state.q3Answer.score >= 3) points.push("Slow response time is costing you deals. Buyers contact multiple agents — the first to respond wins.");
+            if (state.q4Answer.score >= 3) points.push("80% of real estate deals close after 5+ follow-ups. Without a system, you are leaving deals on the table.");
+            if (state.q2Answer.score >= 3) points.push("At your inquiry volume, manually managing every lead means the most important ones fall through the cracks.");
+            if (points.length === 0) points.push("Even small improvements in response time and follow-up consistency can add multiple deals per month.");
+            return points;
+        }
+    },
+
+    hotel: {
+        package: "Property Inquiry Accelerator",
+        price: "₦400,000 setup + ₦50,000/month",
+        avgValue: 45000,
+        q2: {
+            title: "How many booking inquiries do you receive on WhatsApp per month?",
+            sub: "Include all channels — ads, referrals, Instagram DMs.",
+            options: [
+                { label: "Less than 20", value: "under20", score: 1 },
+                { label: "20 – 60", value: "20-60", score: 2 },
+                { label: "60 – 150", value: "60-150", score: 3 },
+                { label: "More than 150", value: "150plus", score: 4 }
+            ]
+        },
+        q3: {
+            title: "What percentage of inquiries actually convert to confirmed bookings?",
+            sub: "This shows how much revenue is leaking from your pipeline.",
+            options: [
+                { label: "More than 60% convert", value: "60plus", score: 1 },
+                { label: "About 40 – 60% convert", value: "40-60", score: 2 },
+                { label: "About 20 – 40% convert", value: "20-40", score: 3 },
+                { label: "Less than 20% convert", value: "under20", score: 4 }
+            ]
+        },
+        q4: {
+            title: "How do you handle guests who inquire but do not confirm immediately?",
+            sub: "Most shortlet revenue leaks happen here.",
+            options: [
+                { label: "I follow up consistently until they decide", value: "consistent", score: 1 },
+                { label: "I follow up once or twice", value: "once", score: 2 },
+                { label: "I wait for them to come back to me", value: "wait", score: 4 },
+                { label: "I do not follow up at all", value: "none", score: 5 }
+            ]
+        },
+        calcLeak: function() {
+            let inquiries = [10, 40, 105, 200][state.q2Answer.score - 1];
+            let lossRate = [0.15, 0.30, 0.50, 0.70][state.q3Answer.score - 1];
+            let followMultiplier = [1, 1.2, 1.5, 2.0][state.q4Answer.score - 1];
+            return Math.round(inquiries * lossRate * this.avgValue * followMultiplier * 0.5);
+        },
+        painPoints: function() {
+            let points = [];
+            if (state.q3Answer.score >= 3) points.push("A low inquiry-to-booking conversion rate means you are spending money on ads but losing guests before they pay.");
+            if (state.q4Answer.score >= 3) points.push("Guests who inquire and do not hear back quickly book somewhere else — usually within hours.");
+            if (state.q2Answer.score >= 3) points.push("High inquiry volume without automation means your best leads are being handled last.");
+            if (points.length === 0) points.push("Faster response and systematic follow-up can significantly improve your booking conversion rate.");
+            return points;
+        }
+    },
+
+    consultant: {
+        package: "Cash Flow Accelerator",
+        price: "₦285,000 setup + ₦40,000/month",
+        avgValue: 200000,
+        q2: {
+            title: "How long does it typically take to collect payment after you send an invoice?",
+            sub: "Be honest — delayed payments destroy cash flow.",
+            options: [
+                { label: "Within 1 week", value: "1week", score: 1 },
+                { label: "2 – 3 weeks", value: "2-3weeks", score: 2 },
+                { label: "1 – 2 months", value: "1-2months", score: 4 },
+                { label: "It varies wildly — I never know", value: "varies", score: 5 }
+            ]
+        },
+        q3: {
+            title: "What happens to prospects who go quiet after you send a proposal?",
+            sub: "This is where most consultant revenue disappears.",
+            options: [
+                { label: "I follow up consistently for at least 2 weeks", value: "consistent", score: 1 },
+                { label: "I follow up once then leave it", value: "once", score: 3 },
+                { label: "I wait for them to come back", value: "wait", score: 4 },
+                { label: "I rarely follow up — I find it awkward", value: "rarely", score: 5 }
+            ]
+        },
+        q4: {
+            title: "How much time do you spend weekly chasing payments and following up on proposals?",
+            sub: "This time has a direct cost to your business.",
+            options: [
+                { label: "Less than 1 hour per week", value: "under1hr", score: 1 },
+                { label: "1 – 3 hours per week", value: "1-3hrs", score: 2 },
+                { label: "3 – 5 hours per week", value: "3-5hrs", score: 3 },
+                { label: "More than 5 hours per week", value: "5plus", score: 4 }
+            ]
+        },
+        calcLeak: function() {
+            let paymentDelay = [0.05, 0.10, 0.20, 0.25][state.q2Answer.score - 1];
+            let proposalLoss = [0.05, 0.05, 0.20, 0.30, 0.40][state.q3Answer.score - 1];
+            let timeWasted = [2000, 8000, 20000, 40000][state.q4Answer.score - 1];
+            let baseRevenue = 500000;
+            return Math.round((baseRevenue * paymentDelay) + (baseRevenue * proposalLoss) + timeWasted);
+        },
+        painPoints: function() {
+            let points = [];
+            if (state.q2Answer.score >= 3) points.push("Long payment cycles mean you are financing your clients — hurting your own cash flow every month.");
+            if (state.q3Answer.score >= 3) points.push("Proposals that go unanswered are not dead — they need 3-5 follow-ups. Most consultants give up too early.");
+            if (state.q4Answer.score >= 3) points.push("Time spent chasing payments and following up is time not spent delivering work or finding new clients.");
+            if (points.length === 0) points.push("Automating your payment reminders and proposal follow-ups frees your time and improves cash flow.");
+            return points;
+        }
+    },
+
+    freelancer: {
+        package: "Cash Flow Accelerator",
+        price: "₦285,000 setup + ₦40,000/month",
+        avgValue: 150000,
+        q2: {
+            title: "How many new client inquiries do you receive on WhatsApp per month?",
+            sub: "Count all platforms where you get project inquiries.",
+            options: [
+                { label: "Less than 10", value: "under10", score: 1 },
+                { label: "10 – 25", value: "10-25", score: 2 },
+                { label: "25 – 50", value: "25-50", score: 3 },
+                { label: "More than 50", value: "50plus", score: 4 }
+            ]
+        },
+        q3: {
+            title: "How long does payment typically take after project delivery?",
+            sub: "Late payments are a freelancer's biggest business risk.",
+            options: [
+                { label: "I collect upfront — no issues", value: "upfront", score: 1 },
+                { label: "Within 1 week of invoicing", value: "1week", score: 2 },
+                { label: "2 – 4 weeks of chasing", value: "2-4weeks", score: 4 },
+                { label: "More than a month — it is stressful", value: "1month", score: 5 }
+            ]
+        },
+        q4: {
+            title: "What happens when a client ghosts after you send a quote?",
+            sub: "Most lost freelance deals happen at the quote stage.",
+            options: [
+                { label: "I follow up systematically until I get an answer", value: "systematic", score: 1 },
+                { label: "I follow up once then let it go", value: "once", score: 3 },
+                { label: "I usually wait for them to come back", value: "wait", score: 4 },
+                { label: "I rarely follow up — it feels pushy", value: "rarely", score: 5 }
+            ]
+        },
+        calcLeak: function() {
+            let inquiries = [5, 18, 38, 60][state.q2Answer.score - 1];
+            let paymentLoss = [0, 0.05, 0.15, 0.25][state.q3Answer.score - 1];
+            let ghostLoss = [0.05, 0.05, 0.25, 0.35, 0.45][state.q4Answer.score - 1];
+            return Math.round((inquiries * ghostLoss * this.avgValue) + (inquiries * 0.3 * paymentLoss * this.avgValue));
+        },
+        painPoints: function() {
+            let points = [];
+            if (state.q3Answer.score >= 3) points.push("Late payments hurt your cash flow and force you to take on more work than you can handle comfortably.");
+            if (state.q4Answer.score >= 3) points.push("Quotes that go unanswered are not rejections — they are opportunities waiting for a follow-up system.");
+            if (state.q2Answer.score >= 3) points.push("High inquiry volume without a tracking system means your best opportunities are falling through the cracks.");
+            if (points.length === 0) points.push("A proper payment and follow-up system can recover a significant amount of revenue monthly.");
+            return points;
+        }
+    },
+
+    photographer: {
+        package: "Cash Flow Accelerator",
+        price: "₦285,000 setup + ₦40,000/month",
+        avgValue: 120000,
+        q2: {
+            title: "How many shoot inquiries or booking requests do you get per month?",
+            sub: "Include all channels — WhatsApp, Instagram DMs, referrals.",
+            options: [
+                { label: "Less than 10", value: "under10", score: 1 },
+                { label: "10 – 25", value: "10-25", score: 2 },
+                { label: "25 – 50", value: "25-50", score: 3 },
+                { label: "More than 50", value: "50plus", score: 4 }
+            ]
+        },
+        q3: {
+            title: "What percentage of people who inquire actually book and pay?",
+            sub: "Most photographers lose 50-70% of inquiries at this stage.",
+            options: [
+                { label: "More than 60% convert to paid bookings", value: "60plus", score: 1 },
+                { label: "40 – 60% convert", value: "40-60", score: 2 },
+                { label: "20 – 40% convert", value: "20-40", score: 3 },
+                { label: "Less than 20% convert", value: "under20", score: 4 }
+            ]
+        },
+        q4: {
+            title: "How do you collect deposits and final payments?",
+            sub: "This is where most photographers lose money.",
+            options: [
+                { label: "I always collect deposit before confirming any shoot", value: "always", score: 1 },
+                { label: "I remind clients manually when payment is due", value: "manual", score: 3 },
+                { label: "Clients often pay late and I chase them", value: "chase", score: 4 },
+                { label: "I sometimes forget to follow up on payments", value: "forget", score: 5 }
+            ]
+        },
+        calcLeak: function() {
+            let inquiries = [5, 18, 38, 65][state.q2Answer.score - 1];
+            let lossRate = [0.20, 0.35, 0.55, 0.70][state.q3Answer.score - 1];
+            let paymentMultiplier = [1, 1, 1.3, 1.5, 1.8][state.q4Answer.score - 1];
+            return Math.round(inquiries * lossRate * this.avgValue * paymentMultiplier * 0.4);
+        },
+        painPoints: function() {
+            let points = [];
+            if (state.q3Answer.score >= 3) points.push("Low inquiry-to-booking conversion means your marketing is working but your follow-up system is not.");
+            if (state.q4Answer.score >= 3) points.push("Late deposits and payments mean clients are less committed and more likely to cancel or reschedule last minute.");
+            if (state.q2Answer.score >= 3) points.push("Managing high inquiry volume manually leads to missed responses, lost bookings and inconsistent follow-up.");
+            if (points.length === 0) points.push("A systematic booking and payment process can significantly improve your conversion rate and cash flow.");
+            return points;
+        }
+    },
+
+    eventplanner: {
+        package: "Cash Flow Accelerator",
+        price: "₦285,000 setup + ₦40,000/month",
+        avgValue: 300000,
+        q2: {
+            title: "How many event inquiries do you receive per month on WhatsApp?",
+            sub: "Include weddings, corporate events, parties and all other inquiries.",
+            options: [
+                { label: "Less than 10", value: "under10", score: 1 },
+                { label: "10 – 25", value: "10-25", score: 2 },
+                { label: "25 – 50", value: "25-50", score: 3 },
+                { label: "More than 50", value: "50plus", score: 4 }
+            ]
+        },
+        q3: {
+            title: "How do you currently handle deposit collection?",
+            sub: "Deposits are your protection — and your cash flow.",
+            options: [
+                { label: "Clients always pay deposit before I begin planning", value: "always", score: 1 },
+                { label: "I remind clients manually and they usually pay", value: "manual", score: 2 },
+                { label: "I often have to chase deposits — it is stressful", value: "chase", score: 4 },
+                { label: "Deposits are often delayed or forgotten", value: "delayed", score: 5 }
+            ]
+        },
+        q4: {
+            title: "What happens when someone inquires about an event but goes quiet?",
+            sub: "Event planning has the longest inquiry-to-close cycle.",
+            options: [
+                { label: "I follow up consistently for 2 – 4 weeks", value: "consistent", score: 1 },
+                { label: "I follow up a couple of times", value: "couple", score: 2 },
+                { label: "I follow up once then wait", value: "once", score: 3 },
+                { label: "I rarely follow up — events take time to decide", value: "rarely", score: 4 }
+            ]
+        },
+        calcLeak: function() {
+            let inquiries = [5, 18, 38, 65][state.q2Answer.score - 1];
+            let depositLoss = [0.05, 0.10, 0.20, 0.30][state.q3Answer.score - 1];
+            let followLoss = [0.05, 0.10, 0.20, 0.30][state.q4Answer.score - 1];
+            return Math.round(inquiries * (depositLoss + followLoss) * this.avgValue * 0.5);
+        },
+        painPoints: function() {
+            let points = [];
+            if (state.q3Answer.score >= 3) points.push("Chasing deposits manually damages client relationships and signals that your business lacks structure.");
+            if (state.q4Answer.score >= 3) points.push("Event clients take time to decide — but without consistent follow-up, they choose a planner who stays top of mind.");
+            if (state.q2Answer.score >= 3) points.push("High inquiry volume without a management system means important clients are not getting the attention they deserve.");
+            if (points.length === 0) points.push("Systematic follow-up and automated deposits can significantly increase your booking rate.");
+            return points;
+        }
+    },
+
+    school: {
+        package: "Cash Flow Accelerator",
+        price: "₦285,000 setup + ₦40,000/month",
+        avgValue: 25000,
+        q2: {
+            title: "How many parent or student inquiries do you receive on WhatsApp per month?",
+            sub: "Include all inquiries about enrolment, fees and classes.",
+            options: [
+                { label: "Less than 20", value: "under20", score: 1 },
+                { label: "20 – 60", value: "20-60", score: 2 },
+                { label: "60 – 150", value: "60-150", score: 3 },
+                { label: "More than 150", value: "150plus", score: 4 }
+            ]
+        },
+        q3: {
+            title: "How do you currently handle school fee collection?",
+            sub: "Late fee payments are a school's biggest cash flow problem.",
+            options: [
+                { label: "Fees are always paid on time — no issues", value: "ontime", score: 1 },
+                { label: "I remind parents manually and they usually pay", value: "manual", score: 2 },
+                { label: "I spend significant time chasing fee payments", value: "chase", score: 4 },
+                { label: "Late payments are a constant stress for the school", value: "stress", score: 5 }
+            ]
+        },
+        q4: {
+            title: "How do you communicate important updates to parents?",
+            sub: "Missed communication leads to missed payments and drop-outs.",
+            options: [
+                { label: "We have a structured communication system", value: "structured", score: 1 },
+                { label: "We broadcast on WhatsApp manually", value: "manual", score: 2 },
+                { label: "Communication is inconsistent — parents often miss information", value: "inconsistent", score: 4 },
+                { label: "We have no real system — it is mostly ad hoc", value: "adhoc", score: 5 }
+            ]
+        },
+        calcLeak: function() {
+            let inquiries = [10, 40, 105, 200][state.q2Answer.score - 1];
+            let feeLoss = [0.02, 0.05, 0.15, 0.25][state.q3Answer.score - 1];
+            let commLoss = [0.01, 0.03, 0.10, 0.15][state.q4Answer.score - 1];
+            return Math.round((inquiries * 0.3 * this.avgValue * feeLoss) + (inquiries * commLoss * this.avgValue));
+        },
+        painPoints: function() {
+            let points = [];
+            if (state.q3Answer.score >= 3) points.push("Chasing school fees manually takes significant administrative time that should be spent on education.");
+            if (state.q4Answer.score >= 3) points.push("Poor parent communication leads to confusion, late payments and students not showing up for important sessions.");
+            if (state.q2Answer.score >= 3) points.push("High inquiry volume without a proper follow-up system means potential students are slipping away each month.");
+            if (points.length === 0) points.push("Automating fee reminders and parent communication can significantly reduce administrative burden.");
+            return points;
+        }
+    },
+
+    logistics: {
+        package: "Cash Flow Accelerator",
+        price: "₦285,000 setup + ₦40,000/month",
+        avgValue: 15000,
+        q2: {
+            title: "How many delivery orders or logistics inquiries do you handle per month?",
+            sub: "Include all orders across all channels.",
+            options: [
+                { label: "Less than 50", value: "under50", score: 1 },
+                { label: "50 – 200", value: "50-200", score: 2 },
+                { label: "200 – 500", value: "200-500", score: 3 },
+                { label: "More than 500", value: "500plus", score: 4 }
+            ]
+        },
+        q3: {
+            title: "How do customers currently track their deliveries?",
+            sub: "Customer anxiety about deliveries leads to churn.",
+            options: [
+                { label: "We have a proper tracking system", value: "proper", score: 1 },
+                { label: "We update customers manually when we remember", value: "manual", score: 3 },
+                { label: "Customers have to chase us for updates", value: "chase", score: 4 },
+                { label: "We have no real update system", value: "none", score: 5 }
+            ]
+        },
+        q4: {
+            title: "How do you collect payment for deliveries?",
+            sub: "Cash flow is critical in logistics.",
+            options: [
+                { label: "Payment before pickup — always", value: "before", score: 1 },
+                { label: "Payment on delivery — mostly on time", value: "ondelivery", score: 2 },
+                { label: "I often have to chase payment after delivery", value: "chase", score: 4 },
+                { label: "Bad debts and late payments are a real problem", value: "baddebt", score: 5 }
+            ]
+        },
+        calcLeak: function() {
+            let orders = [25, 125, 350, 600][state.q2Answer.score - 1];
+            let churnRate = [0.02, 0.05, 0.10, 0.15][state.q3Answer.score - 1];
+            let paymentLoss = [0, 0.02, 0.08, 0.15][state.q4Answer.score - 1];
+            return Math.round((orders * churnRate * this.avgValue) + (orders * paymentLoss * this.avgValue));
+        },
+        painPoints: function() {
+            let points = [];
+            if (state.q3Answer.score >= 3) points.push("Customers who have to chase for delivery updates lose trust and take their business elsewhere.");
+            if (state.q4Answer.score >= 3) points.push("Late and failed payments after delivery hurt your cash flow and create significant bad debt risk.");
+            if (state.q2Answer.score >= 3) points.push("High order volume without automation leads to errors, missed updates and customer complaints.");
+            if (points.length === 0) points.push("Automated order updates and payment collection can significantly improve customer retention and cash flow.");
+            return points;
+        }
+    },
+
+    security: {
+        package: "Cash Flow Accelerator",
+        price: "₦285,000 setup + ₦40,000/month",
+        avgValue: 80000,
+        q2: {
+            title: "How many client contract renewals or new inquiries do you manage per month?",
+            sub: "Include all contract types — residential, commercial, events.",
+            options: [
+                { label: "Less than 10", value: "under10", score: 1 },
+                { label: "10 – 30", value: "10-30", score: 2 },
+                { label: "30 – 60", value: "30-60", score: 3 },
+                { label: "More than 60", value: "60plus", score: 4 }
+            ]
+        },
+        q3: {
+            title: "How do you handle monthly retainer payment collection?",
+            sub: "Retainer businesses live or die by consistent cash flow.",
+            options: [
+                { label: "Clients pay on time every month — no issues", value: "ontime", score: 1 },
+                { label: "I remind clients manually each month", value: "manual", score: 3 },
+                { label: "I spend days chasing payments every month", value: "chase", score: 4 },
+                { label: "Late payments are a serious and recurring problem", value: "serious", score: 5 }
+            ]
+        },
+        q4: {
+            title: "How do you follow up on contract renewal before expiry?",
+            sub: "Losing a client to a competitor at renewal is preventable.",
+            options: [
+                { label: "I have a structured renewal follow-up process", value: "structured", score: 1 },
+                { label: "I remind clients when I remember", value: "remember", score: 3 },
+                { label: "Contracts sometimes lapse before I follow up", value: "lapse", score: 4 },
+                { label: "I have lost clients because I missed renewal dates", value: "lost", score: 5 }
+            ]
+        },
+        calcLeak: function() {
+            let contracts = [5, 20, 45, 80][state.q2Answer.score - 1];
+            let paymentLoss = [0.02, 0.05, 0.15, 0.25][state.q3Answer.score - 1];
+            let renewalLoss = [0.02, 0.02, 0.10, 0.15, 0.20][state.q4Answer.score - 1];
+            return Math.round(contracts * (paymentLoss + renewalLoss) * this.avgValue);
+        },
+        painPoints: function() {
+            let points = [];
+            if (state.q3Answer.score >= 3) points.push("Monthly retainer payment delays create cash flow gaps that affect your ability to pay staff and run operations.");
+            if (state.q4Answer.score >= 3) points.push("Missing contract renewal windows hands clients to competitors. Automated reminders prevent this entirely.");
+            if (state.q2Answer.score >= 3) points.push("At your contract volume, manual tracking of renewals and payments is a risk you cannot afford.");
+            if (points.length === 0) points.push("Automating payment reminders and renewal follow-ups protects your monthly recurring revenue.");
+            return points;
+        }
+    },
+
+    printing: {
+        package: "Cash Flow Accelerator",
+        price: "₦285,000 setup + ₦40,000/month",
+        avgValue: 35000,
+        q2: {
+            title: "How many print or branding orders do you receive per month?",
+            sub: "Include all order types — business cards, banners, branded items.",
+            options: [
+                { label: "Less than 20", value: "under20", score: 1 },
+                { label: "20 – 60", value: "20-60", score: 2 },
+                { label: "60 – 150", value: "60-150", score: 3 },
+                { label: "More than 150", value: "150plus", score: 4 }
+            ]
+        },
+        q3: {
+            title: "How do you handle order confirmation and production updates?",
+            sub: "Customers who do not know their order status call and distract your team.",
+            options: [
+                { label: "Customers get automatic updates throughout production", value: "automatic", score: 1 },
+                { label: "I update customers manually when I remember", value: "manual", score: 3 },
+                { label: "Customers mostly have to call us for updates", value: "call", score: 4 },
+                { label: "We have no real update system in place", value: "none", score: 5 }
+            ]
+        },
+        q4: {
+            title: "How is payment typically collected for orders?",
+            sub: "Print businesses often struggle with balance collection after delivery.",
+            options: [
+                { label: "Full payment upfront always", value: "upfront", score: 1 },
+                { label: "Deposit upfront, balance on collection", value: "deposit", score: 2 },
+                { label: "I often have to chase balance payments", value: "chase", score: 4 },
+                { label: "Bad debts on completed orders are a real issue", value: "baddebt", score: 5 }
+            ]
+        },
+        calcLeak: function() {
+            let orders = [10, 40, 105, 200][state.q2Answer.score - 1];
+            let updateLoss = [0, 0.02, 0.05, 0.08][state.q3Answer.score - 1];
+            let paymentLoss = [0, 0.02, 0.10, 0.18][state.q4Answer.score - 1];
+            return Math.round(orders * (updateLoss + paymentLoss) * this.avgValue);
+        },
+        painPoints: function() {
+            let points = [];
+            if (state.q3Answer.score >= 3) points.push("Customers calling for updates disrupts your production team and signals a lack of professionalism.");
+            if (state.q4Answer.score >= 3) points.push("Collecting balance payments after delivery is one of the hardest things in printing — automation makes it easier.");
+            if (state.q2Answer.score >= 3) points.push("At your order volume, managing updates and payments manually is costing you time and money every day.");
+            if (points.length === 0) points.push("Automated order updates and payment collection can improve customer experience and your cash flow.");
+            return points;
+        }
+    },
+
+    // PRODUCT / RETAIL BUSINESSES
+    fashion: {
+        package: "Revenue Recovery System",
+        price: "₦250,000 setup + ₦40,000/month",
+        avgValue: 25000,
+        q2: {
+            title: "How many product inquiries do you receive on WhatsApp per month?",
+            sub: "Count every message asking about price, availability or orders.",
+            options: [
+                { label: "Less than 50", value: "under50", score: 1 },
+                { label: "50 – 150", value: "50-150", score: 2 },
+                { label: "150 – 400", value: "150-400", score: 3 },
+                { label: "More than 400", value: "400plus", score: 4 }
+            ]
+        },
+        q3: {
+            title: "What happens when someone asks about a product and then goes quiet?",
+            sub: "This is where fashion businesses lose the most revenue.",
+            options: [
+                { label: "I follow up within 24 hours every time", value: "24hrs", score: 1 },
+                { label: "I follow up sometimes when I remember", value: "sometimes", score: 3 },
+                { label: "I rarely follow up — too many messages", value: "rarely", score: 4 },
+                { label: "I do not follow up at all", value: "never", score: 5 }
+            ]
+        },
+        q4: {
+            title: "How often do you run promotions or flash sales to your existing customer list?",
+            sub: "Your existing customers are your most valuable revenue source.",
+            options: [
+                { label: "Weekly — I have a system for this", value: "weekly", score: 1 },
+                { label: "Monthly or occasionally", value: "monthly", score: 2 },
+                { label: "Rarely — I do not really have a list", value: "rarely", score: 4 },
+                { label: "Never — I only sell to people who contact me first", value: "never", score: 5 }
+            ]
+        },
+        calcLeak: function() {
+            let inquiries = [25, 100, 275, 500][state.q2Answer.score - 1];
+            let ghostRate = [0.30, 0.50, 0.65, 0.70][state.q3Answer.score - 1];
+            let promoLoss = [0, 0.05, 0.15, 0.25][state.q4Answer.score - 1];
+            let ghostLoss = inquiries * ghostRate * this.avgValue * 0.20;
+            let promoRevLoss = inquiries * promoLoss * this.avgValue;
+            return Math.round(ghostLoss + promoRevLoss);
+        },
+        painPoints: function() {
+            let points = [];
+            if (state.q3Answer.score >= 3) points.push("60-70% of fashion inquiries ghost after seeing the price. A single follow-up message recovers 20-25% of them.");
+            if (state.q4Answer.score >= 3) points.push("Your existing customer list is sitting idle. A monthly flash sale to 200 customers generates ₦150k+ each time.");
+            if (state.q2Answer.score >= 3) points.push("At your inquiry volume, manually tracking and following up every lead is impossible without a system.");
+            if (points.length === 0) points.push("Systematic follow-up and regular customer broadcasts can significantly increase your monthly revenue.");
+            return points;
+        }
+    },
+
+    restaurant: {
+        package: "Revenue Recovery System",
+        price: "₦250,000 setup + ₦40,000/month",
+        avgValue: 8000,
+        q2: {
+            title: "How many orders or food inquiries do you receive on WhatsApp per month?",
+            sub: "Include delivery orders, catering inquiries and reservations.",
+            options: [
+                { label: "Less than 100", value: "under100", score: 1 },
+                { label: "100 – 300", value: "100-300", score: 2 },
+                { label: "300 – 700", value: "300-700", score: 3 },
+                { label: "More than 700", value: "700plus", score: 4 }
+            ]
+        },
+        q3: {
+            title: "How do you currently handle your regular customer base?",
+            sub: "Repeat customers are a restaurant's most valuable asset.",
+            options: [
+                { label: "I broadcast deals and specials to my customer list regularly", value: "regular", score: 1 },
+                { label: "I post on social media but do not reach customers directly", value: "social", score: 2 },
+                { label: "I wait for customers to come back on their own", value: "wait", score: 4 },
+                { label: "I have no organised customer list or follow-up system", value: "none", score: 5 }
+            ]
+        },
+        q4: {
+            title: "How do you handle catering or bulk order inquiries?",
+            sub: "Catering orders are where restaurants make their biggest margins.",
+            options: [
+                { label: "I have a clear process and close most of them", value: "clear", score: 1 },
+                { label: "I follow up manually when I can", value: "manual", score: 3 },
+                { label: "Many catering inquiries go cold before I follow up", value: "cold", score: 4 },
+                { label: "I have no system — I lose many catering deals", value: "none", score: 5 }
+            ]
+        },
+        calcLeak: function() {
+            let orders = [50, 200, 500, 850][state.q2Answer.score - 1];
+            let customerLoss = [0, 0.05, 0.15, 0.25][state.q3Answer.score - 1];
+            let cateringLoss = [0.05, 0.05, 0.20, 0.35][state.q4Answer.score - 1];
+            let cateringValue = 80000;
+            return Math.round((orders * customerLoss * this.avgValue) + (orders * 0.02 * cateringLoss * cateringValue));
+        },
+        painPoints: function() {
+            let points = [];
+            if (state.q3Answer.score >= 3) points.push("Customers who ate with you last month are your best source of revenue this month — but only if you stay in touch.");
+            if (state.q4Answer.score >= 3) points.push("Catering and bulk orders are your highest-margin business. Losing them to poor follow-up is costly.");
+            if (state.q2Answer.score >= 3) points.push("High order volume without automation means your team spends too much time on admin instead of cooking.");
+            if (points.length === 0) points.push("A customer reactivation system and catering follow-up process can significantly increase monthly revenue.");
+            return points;
+        }
+    },
+
+    pharmacy: {
+        package: "Revenue Recovery System",
+        price: "₦250,000 setup + ₦40,000/month",
+        avgValue: 12000,
+        q2: {
+            title: "How many customer orders or inquiries do you handle on WhatsApp per month?",
+            sub: "Include prescription refills, product inquiries and delivery orders.",
+            options: [
+                { label: "Less than 50", value: "under50", score: 1 },
+                { label: "50 – 200", value: "50-200", score: 2 },
+                { label: "200 – 500", value: "200-500", score: 3 },
+                { label: "More than 500", value: "500plus", score: 4 }
+            ]
+        },
+        q3: {
+            title: "How do you handle prescription refill reminders for regular customers?",
+            sub: "Refill reminders are the easiest revenue to automate.",
+            options: [
+                { label: "I have a system that reminds customers automatically", value: "automatic", score: 1 },
+                { label: "I call or message regular customers manually", value: "manual", score: 2 },
+                { label: "Customers come back when they run out — no reminders", value: "wait", score: 4 },
+                { label: "I have no refill reminder system at all", value: "none", score: 5 }
+            ]
+        },
+        q4: {
+            title: "How do you promote new products or health packages to your customer base?",
+            sub: "Pharmacy customers are highly receptive to relevant health offers.",
+            options: [
+                { label: "I broadcast promotions to my customer list regularly", value: "regular", score: 1 },
+                { label: "I promote occasionally on social media", value: "social", score: 2 },
+                { label: "I rarely promote to existing customers", value: "rarely", score: 4 },
+                { label: "I have no customer database to broadcast to", value: "none", score: 5 }
+            ]
+        },
+        calcLeak: function() {
+            let orders = [25, 125, 350, 600][state.q2Answer.score - 1];
+            let refillLoss = [0, 0.05, 0.20, 0.35][state.q3Answer.score - 1];
+            let promoLoss = [0, 0.03, 0.10, 0.20][state.q4Answer.score - 1];
+            return Math.round(orders * (refillLoss + promoLoss) * this.avgValue);
+        },
+        painPoints: function() {
+            let points = [];
+            if (state.q3Answer.score >= 3) points.push("Customers who run out of medication before you remind them often buy from the nearest competitor instead.");
+            if (state.q4Answer.score >= 3) points.push("Your existing customer base is your most receptive audience for new health products — but only if you reach them.");
+            if (state.q2Answer.score >= 3) points.push("High inquiry volume without a tracking system means customer service quality drops and repeat purchases decrease.");
+            if (points.length === 0) points.push("Automated refill reminders and promotional broadcasts to existing customers can significantly grow monthly revenue.");
+            return points;
+        }
+    },
+
+    supermarket: {
+        package: "Revenue Recovery System",
+        price: "₦250,000 setup + ₦40,000/month",
+        avgValue: 15000,
+        q2: {
+            title: "How many orders or delivery requests do you receive on WhatsApp per month?",
+            sub: "Include all orders — delivery, bulk orders and reservations.",
+            options: [
+                { label: "Less than 100", value: "under100", score: 1 },
+                { label: "100 – 400", value: "100-400", score: 2 },
+                { label: "400 – 1000", value: "400-1000", score: 3 },
+                { label: "More than 1000", value: "1000plus", score: 4 }
+            ]
+        },
+        q3: {
+            title: "How do you communicate promotions and deals to your customers?",
+            sub: "Supermarkets that broadcast deals consistently outsell those that do not.",
+            options: [
+                { label: "I send deals directly to my customer list on WhatsApp", value: "direct", score: 1 },
+                { label: "I post on social media and hope customers see it", value: "social", score: 3 },
+                { label: "I rely on in-store signage only", value: "instore", score: 4 },
+                { label: "I rarely run promotions to existing customers", value: "rarely", score: 5 }
+            ]
+        },
+        q4: {
+            title: "How do you handle customers who ordered before but have not returned in 30+ days?",
+            sub: "Inactive customers are hidden revenue.",
+            options: [
+                { label: "I have a reactivation system that reaches out to them", value: "system", score: 1 },
+                { label: "I occasionally message them when I remember", value: "occasional", score: 3 },
+                { label: "I wait for them to come back on their own", value: "wait", score: 4 },
+                { label: "I have no way to track or reach inactive customers", value: "none", score: 5 }
+            ]
+        },
+        calcLeak: function() {
+            let orders = [50, 250, 700, 1200][state.q2Answer.score - 1];
+            let promoLoss = [0, 0.05, 0.10, 0.15][state.q3Answer.score - 1];
+            let inactiveLoss = [0, 0.03, 0.08, 0.15][state.q4Answer.score - 1];
+            return Math.round(orders * (promoLoss + inactiveLoss) * this.avgValue);
+        },
+        painPoints: function() {
+            let points = [];
+            if (state.q3Answer.score >= 3) points.push("Customers who do not see your promotions shop at the next closest supermarket. Direct WhatsApp deals change this.");
+            if (state.q4Answer.score >= 3) points.push("Customers who bought from you 30+ days ago are your easiest win — one message brings many of them back.");
+            if (state.q2Answer.score >= 3) points.push("High order volume without automation creates errors, delays and customer frustration.");
+            if (points.length === 0) points.push("A customer broadcast and reactivation system can drive significant additional monthly revenue.");
+            return points;
+        }
+    },
+
+    hairproduct: {
+        package: "Revenue Recovery System",
+        price: "₦250,000 setup + ₦40,000/month",
+        avgValue: 20000,
+        q2: {
+            title: "How many product inquiries or orders do you receive on WhatsApp per month?",
+            sub: "Include DMs, broadcast replies and referral messages.",
+            options: [
+                { label: "Less than 50", value: "under50", score: 1 },
+                { label: "50 – 200", value: "50-200", score: 2 },
+                { label: "200 – 500", value: "200-500", score: 3 },
+                { label: "More than 500", value: "500plus", score: 4 }
+            ]
+        },
+        q3: {
+            title: "What happens when a customer asks about a product and then does not order?",
+            sub: "Beauty product brands lose 60-70% of interested leads at this stage.",
+            options: [
+                { label: "I follow up within 24 hours with more information", value: "24hrs", score: 1 },
+                { label: "I follow up sometimes when I think of it", value: "sometimes", score: 3 },
+                { label: "I rarely follow up — there are too many to manage", value: "rarely", score: 4 },
+                { label: "I do not follow up at all", value: "never", score: 5 }
+            ]
+        },
+        q4: {
+            title: "How do you re-engage customers who bought from you before but have not ordered in a while?",
+            sub: "Repeat customers are 5x cheaper to sell to than new ones.",
+            options: [
+                { label: "I have a structured reactivation process", value: "structured", score: 1 },
+                { label: "I occasionally reach out with new products", value: "occasional", score: 2 },
+                { label: "I wait for them to come back when they need more", value: "wait", score: 4 },
+                { label: "I have no way to track or reach past customers", value: "none", score: 5 }
+            ]
+        },
+        calcLeak: function() {
+            let inquiries = [25, 125, 350, 600][state.q2Answer.score - 1];
+            let ghostRate = [0.35, 0.50, 0.65, 0.70][state.q3Answer.score - 1];
+            let inactiveLoss = [0, 0.05, 0.15, 0.25][state.q4Answer.score - 1];
+            let ghostLoss = inquiries * ghostRate * this.avgValue * 0.18;
+            let inactiveRevLoss = inquiries * 0.3 * inactiveLoss * this.avgValue;
+            return Math.round(ghostLoss + inactiveRevLoss);
+        },
+        painPoints: function() {
+            let points = [];
+            if (state.q3Answer.score >= 3) points.push("Beauty product customers who ghost after inquiry convert at 20-25% with a single well-timed follow-up.");
+            if (state.q4Answer.score >= 3) points.push("Customers who loved your product are ready to reorder — they just need a nudge. Without a system, you miss this.");
+            if (state.q2Answer.score >= 3) points.push("High inquiry volume without automation means your best potential customers are not getting the attention they need.");
+            if (points.length === 0) points.push("Automated follow-up and customer reactivation can significantly increase your repeat purchase rate.");
+            return points;
+        }
+    }
+};
+
+// Map grouped types to their question config
+const businessTypeMap = {
+    salon: 'salon',
+    gym: 'gym',
+    realestate: 'realestate',
+    hotel: 'hotel',
+    consultant: 'consultant',
+    freelancer: 'freelancer',
+    photographer: 'photographer',
+    eventplanner: 'eventplanner',
+    school: 'school',
+    logistics: 'logistics',
+    security: 'security',
+    printing: 'printing',
+    fashion: 'fashion',
+    restaurant: 'restaurant',
+    pharmacy: 'pharmacy',
+    supermarket: 'supermarket',
+    hairproduct: 'hairproduct'
+};
+
+// ============================================
+// QUIZ LOGIC
+// ============================================
+
+function selectBusinessType(btn, type) {
+    document.querySelectorAll('#step1 .option-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    state.businessType = type;
+    state.businessLabel = btn.textContent.trim();
+    setTimeout(() => loadDynamicQuestions(type), 300);
+}
+
+function loadDynamicQuestions(type) {
+    const config = questions[businessTypeMap[type]];
+    if (!config) return;
+
+    loadQuestion(2, config.q2);
+    loadQuestion(3, config.q3);
+    loadQuestion(4, config.q4);
+
+    goToStep(2);
+}
+
+function loadQuestion(stepNum, qConfig) {
+    document.getElementById(`q${stepNum}-title`).textContent = qConfig.title;
+    document.getElementById(`q${stepNum}-sub`).textContent = qConfig.sub;
+
+    const container = document.getElementById(`q${stepNum}-options`);
+    container.innerHTML = '';
+
+    qConfig.options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.textContent = opt.label;
+        btn.onclick = function() {
+            container.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+            this.classList.add('selected');
+            state[`q${stepNum}Answer`] = { value: opt.value, score: opt.score };
+            document.getElementById(`next${stepNum}`).disabled = false;
+        };
+        container.appendChild(btn);
+    });
+
+    document.getElementById(`next${stepNum}`).disabled = true;
+}
+
+let revenueSelected = false;
+let adsSelected = false;
+
+function selectRevenue(btn, value) {
+    document.querySelectorAll('#revenue-options .option-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    state.revenue = value;
+    revenueSelected = true;
+    checkStep5Complete();
+}
+
+function selectAds(btn, value) {
+    document.querySelectorAll('#ads-options .option-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    state.runningAds = value;
+    adsSelected = true;
+    checkStep5Complete();
+}
+
+function checkStep5Complete() {
+    if (revenueSelected && adsSelected) {
+        document.getElementById('next5').disabled = false;
+    }
+}
+
+function goToStep(stepNum) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById(`step${stepNum}`).classList.add('active');
+    updateProgress(stepNum);
+    window.scrollTo(0, 0);
+}
+
+function goBack(currentStep) {
+    if (currentStep === 2) goToStep(1);
+    else if (currentStep === 3) goToStep(2);
+    else if (currentStep === 4) goToStep(3);
+    else if (currentStep === 5) goToStep(4);
+    else if (currentStep === 6) goToStep(5);
+}
+
+function updateProgress(step) {
+    const pct = ((step - 1) / 6) * 100;
+    document.getElementById('progressBar').style.width = pct + '%';
+}
+
+// Calculating text rotation
+const calcTexts = [
+    "Analysing your WhatsApp inquiry data...",
+    "Calculating no-show and ghost rate impact...",
+    "Estimating monthly revenue loss...",
+    "Identifying your biggest pain points...",
+    "Matching you to the right solution..."
+];
+
+let calcIndex = 0;
+function rotateCalcText() {
+    calcIndex = (calcIndex + 1) % calcTexts.length;
+    const el = document.getElementById('calcText');
+    if (el) el.textContent = calcTexts[calcIndex];
+}
+
+// ============================================
+// SUBMIT QUIZ
+// ============================================
+
+function submitQuiz() {
+    const name = document.getElementById('fname').value.trim();
+    const email = document.getElementById('femail').value.trim();
+    const phone = document.getElementById('fphone').value.trim();
+
+    if (!name || !email || !phone) {
+        alert('Please fill in all fields to see your results.');
+        return;
+    }
+
+    if (!email.includes('@')) {
+        alert('Please enter a valid email address.');
+        return;
+    }
+
+    state.name = name;
+    state.email = email;
+    state.phone = phone;
+
+    // Calculate leak
+    const config = questions[businessTypeMap[state.businessType]];
+    state.leakAmount = config.calcLeak();
+    state.painPoints = config.painPoints();
+    state.packageName = config.package;
+    state.packagePrice = config.price;
+
+    // Determine qualification
+    const isQualified = state.revenue !== 'under500k';
+
+    // Show loading
+    goToStep('Loading');
+
+    // Send data to Google Sheets
+    sendToGoogleSheets(isQualified);
+
+    // If qualified, trigger Wati
+    if (isQualified) {
+        sendWatiMessage(name, phone, state.leakAmount);
+    }
+
+    // Show results after 2.5 seconds
+    setTimeout(() => {
+        if (isQualified) {
+            showQualifiedResults();
+        } else {
+            showUnqualifiedResults();
+        }
+    }, 2500);
+}
+
+function showQualifiedResults() {
+    document.getElementById('leakAmount').textContent = '₦' + state.leakAmount.toLocaleString();
+
+    const painContainer = document.getElementById('painPoints');
+    painContainer.innerHTML = '';
+    state.painPoints.forEach(point => {
+        painContainer.innerHTML += `
+            <div class="pain-item">
+                <div class="dot"></div>
+                <p>${point}</p>
+            </div>
+        `;
+    });
+
+    document.getElementById('packageName').textContent = state.packageName;
+    document.getElementById('packagePrice').textContent = state.packagePrice;
+
+    goToStep('Qualified');
+}
+
+function showUnqualifiedResults() {
+    goToStep('Unqualified');
+}
+
+// ============================================
+// GOOGLE SHEETS INTEGRATION
+// ============================================
+
+function sendToGoogleSheets(isQualified) {
+    const config = questions[businessTypeMap[state.businessType]];
+    const payload = {
+        timestamp: new Date().toISOString(),
+        name: state.name,
+        email: state.email,
+        phone: state.phone,
+        businessType: state.businessLabel,
+        revenueRange: state.revenue,
+        runningAds: state.runningAds,
+        qualified: isQualified ? 'Yes' : 'No',
+        leakAmount: state.leakAmount,
+        packageName: state.packageName,
+        packagePrice: config.price,
+        painPoints: state.painPoints.join(' | '),
+        whatsappSent: isQualified ? 'Yes' : 'No'
+    };
+
+    fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+    }).catch(err => console.log('Sheets error:', err));
+}
+
+// ============================================
+// WATI INTEGRATION
+// ============================================
+
+function sendWatiMessage(name, phone, leakAmount) {
+    // Format phone — remove leading 0, add 234
+    let formattedPhone = phone.replace(/\s/g, '');
+    if (formattedPhone.startsWith('0')) {
+        formattedPhone = '234' + formattedPhone.substring(1);
+    }
+
+    const firstName = name.split(' ')[0];
+    const leakFormatted = leakAmount.toLocaleString();
+
+    const payload = {
+        template_name: WATI_TEMPLATE_NAME,
+        broadcast_name: "quiz_qualified_lead",
+        parameters: [
+            { name: "1", value: firstName },
+            { name: "2", value: leakFormatted }
+        ]
+    };
+
+    fetch(`${WATI_API_URL}/api/v1/sendTemplateMessage?whatsappNumber=${formattedPhone}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${WATI_API_TOKEN}`
+        },
+        body: JSON.stringify(payload)
+    }).catch(err => console.log('Wati error:', err));
+}
+
+// Rotate calc text every 600ms when on step 6
+setInterval(() => {
+    if (document.getElementById('step6').classList.contains('active')) {
+        rotateCalcText();
+    }
+}, 600);
+
+</script>
+
+<!-- APPS SCRIPT CODE (Deploy separately in Google Apps Script) -->
+<!--
+function doPost(e) {
+  var sheet = SpreadsheetApp.openById('1zmJOkdW_FeuMvml5_qFhQ9LcXp_Y5nom_xEEgH7kjO0');
+  var data = JSON.parse(e.postData.contents);
+  
+  var tabName = data.qualified === 'Yes' ? 'Qualified' : 'Unqualified';
+  var tab = sheet.getSheetByName(tabName);
+  
+  if (data.qualified === 'Yes') {
+    tab.appendRow([
+      data.timestamp,
+      data.name,
+      data.email,
+      data.phone,
+      data.businessType,
+      data.revenueRange,
+      data.runningAds,
+      data.leakAmount,
+      data.packageName,
+      data.packagePrice,
+      data.painPoints,
+      data.whatsappSent
+    ]);
+  } else {
+    tab.appendRow([
+      data.timestamp,
+      data.name,
+      data.email,
+      data.phone,
+      data.businessType,
+      data.revenueRange,
+      'Yes'
+    ]);
+  }
+  
+  return ContentService.createTextOutput(JSON.stringify({status: 'success'}))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+-->
+
+</body>
+</html>
